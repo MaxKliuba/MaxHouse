@@ -1,0 +1,2196 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>MaxLamp | Homepage</title>
+		<meta charset="utf-8"/>
+		<link rel="shortcut icon" href="esp.png" type="image/png">
+		<!-- <link rel="icon" href="esp.ico" type="images/x-icon"> -->
+		<link rel="stylesheet" href="theme.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script src="jquery-3.5.1.min.js"></script>
+    	<link href="roundslider.min.css" rel="stylesheet" />
+    	<script src="roundslider.min.js"></script>
+    	<script src="long-press-event.min.js"></script>
+
+    	<style type="text/css">
+			.settings-button{
+				right: 0%;
+				margin-right: 15px;
+				background-image: url('button_settings.png');
+			}
+
+			.slider-button-box{
+				display: block;
+				width: 200px;
+				height: 200px;
+				margin: 0 auto;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				margin-left: 20px;
+				margin-right: 20px; 
+			}
+			
+			.rs-handle {
+			  background-color: #006EEC;
+			  border: 1px solid black;
+			}
+
+			.rs-animation .rs-transition {
+			  transition-duration: 0.2s;
+			}
+
+			.slider-button{
+				background-color: transparent;
+				border-radius: 50%;
+				box-shadow: black 0 0 4px;
+				border: 5px solid white;
+				background-repeat: no-repeat, repeat;
+				background-position: center;
+				position: absolute;
+			}
+
+			.slider-button:hover{
+				transform: scale(1.1);
+			}
+
+			#brightness-switch-box{
+				margin: 0 auto;
+			}
+
+			#brightness-slider{
+				position: absolute;
+			}
+
+			#button-switch{
+				width: 110px;
+				height: 110px;
+				background-image: url('button_switch.png');
+				background-size: 80px;
+				margin-left: 40px;
+				margin-top: 40px;
+			}
+
+			.switch-on {
+				background-color: #006EEC;
+				box-shadow: white 0 0 10px;
+			}
+						
+			.switch-off {
+				background-color: #ABABAB;
+				box-shadow: black 0 0 6px;
+			}	
+
+
+			#effects-box{
+				margin: 0 auto;
+				margin-top: 30px; 
+				text-align: center;
+				display: block;
+				width: 580px;
+			}
+
+			.effects-select{
+				position: relative;
+				width: 400px;
+				height: 60px;
+				font-weight: bold;
+				transform: translate(0, -53%);
+				cursor: pointer;
+				text-align: center;
+			    text-align-last: center;
+			    -moz-text-align-last: center;
+				background-color: white;
+				color: transparent;
+				outline:none;
+				border: 1px solid #ABABAB;
+				border-radius: 30px;
+				display: inline-block;
+				font-size: 32px;
+				box-shadow: black 0 0 2px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				padding-left: 20px;
+				padding-right: 20px; 
+			}
+
+			.effects-button{
+				position: relative;
+				background-color: transparent;
+				border: 5px solid white;
+				border-radius: 50%;
+				width: 55px;
+				height: 55px;
+				transition: 0.25s;
+				display: inline-block;
+				cursor: pointer;
+				background-size: 75%;
+				box-shadow: black 0 0 4px;
+				background-repeat: no-repeat, repeat;
+				background-position: center;
+				background-image: url('button_back.png');
+				margin: 10px;
+			}
+
+			#next-effect-button{
+				transform: scale(-1);
+			}
+
+			#prev-effect-button:hover{
+				transform: scale(1.1);
+			}
+
+			#next-effect-button:hover{
+				transform: scale(-1.1);
+			}
+
+			#sliders-buttons-container{
+				text-align: center;
+				text-align: -webkit-center;
+				text-align: -moz-center;
+				display: block;
+				margin: 20px auto;
+			}
+
+			#scale-box{
+				display: inline-block;
+				width: 160px;
+				height: 160px;
+			}
+
+			#scale-slider{
+				position: absolute;
+			}
+
+			#scale-button{
+				width: 70px;
+				height: 70px;
+				margin-left: 40px;
+				margin-top: 40px;
+				background-image: url('slider_buttons.png');
+				background-size: 290px;
+				background-position: -147px center;
+			}
+
+			#sound-box{
+				display: inline-block;
+				width: 160px;
+				height: 160px;
+			}
+
+			#sound-slider{
+				position: absolute;
+			}
+
+			#sound-button{
+				width: 70px;
+				height: 70px;
+				margin-left: 40px;
+				margin-top: 40px;
+				background-image: url('slider_buttons.png');
+				background-size: 290px;
+			}
+
+			.sound-on{
+				background-position: -10px center;
+			}
+
+			.sound-off{
+				background-position: -79px center;
+			}
+
+			#speed-box{
+				display: inline-block;
+				width: 160px;
+				height: 160px;
+			}
+
+			#speed-slider{
+				position: absolute;
+			}
+
+			#speed-button{
+				width: 70px;
+				height: 70px;
+				margin-left: 40px;
+				margin-top: 40px;
+				background-image: url('slider_buttons.png');
+				background-size: 290px;
+				background-position: -216px center;
+			}
+
+			.widget {
+				margin: 40px auto;
+				width: 600px;
+				height: 140px;
+				box-sizing: border-box;
+				background-color: rgba(255, 255, 255, 0.7);
+				border-radius: 30px;
+				display: block;
+				box-shadow: black 0 0 10px;
+				transition: 0.25s;
+			}
+
+			.left-box{
+				width: 120px;
+				height: 100%;
+				display: inline-block;
+			}
+
+			.widget-button{		
+				width: 80px;
+				height: 80px;
+				background-color: white;
+				position: relative;
+				display: inline-block;
+				transition: 0.25s;
+				box-shadow: black 0 0 5px;
+				margin: 30px;
+				margin-left: 20px;
+				border-radius: 50%;
+				cursor: pointer;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+			}
+
+			.widget-button:hover, .widget-edit-box:hover, .widget-reset:hover{
+				transform: scale(1.1);
+			}
+
+			.start-button{
+
+			}
+
+			.start-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 30px;
+				height: 30px;
+				border: 1px solid black;
+				border-radius: 15%;
+				background-color: #006EEC;
+				left: 50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.stop-button{
+
+			}
+
+			.stop-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 31px;
+				height: 32px;
+				border: 1px solid black;
+				background-color: black;
+				clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				-webkit-clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				border-radius: 15%;
+				left: 50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.stop-button::after{
+				content: ''; 
+    			position: absolute;
+    			width: 31px;
+				height: 31px;
+				background-color: #006EEC;
+				clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				-webkit-clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				border-radius: 15%;
+				left: 50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.center-box{
+				width: 350px;
+				height: 100%;
+				transform: translate(0, -17%);
+				display: inline-block;
+			}
+
+			.time-text{
+				margin-top: 10px;
+				width: 100px;
+				height: 45px;
+				background-color: transparent;
+				border: none;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 40px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.replay-button{
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				top: 22px;
+				margin-left: 5px;
+				border-radius: 50%;
+				background-repeat: no-repeat, repeat;
+				background-image: url('slider_buttons.png');
+				background-size: 142px;
+				background-position: -113px 48%;
+				display: inline-block;
+
+			}
+
+			.replay-off{
+				background-color: #ABABAB;
+				border: 1px solid #ABABAB;
+			}
+
+			.replay-on{
+				background-color: #006EEC;
+				border: 1px solid #006EEC;
+			}
+
+			.seconds-text{
+				width: 100%;
+				height: 20px;
+				background-color: transparent;
+				border: none;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 20px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: block;
+			}
+
+			.bottom-center-box{
+				height: 50px;
+				width: 100%;
+				margin-top: 10px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: block;
+			}
+
+			.minutes-text{
+				width: 50px;
+				height: 30px;
+				background-color: transparent;
+				margin-top: 8px;
+				border: none;
+				border-radius: 15px;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 20px;
+				font-weight: bold;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.type-text{
+				width: 50px;
+				height: 30px;
+				background-color: transparent;
+				margin-top: 8px;
+				border: none;
+				border-radius: 15px;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 13px;
+				font-weight: bold;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.effect-text{
+				width: 220px;
+				height: 30px;
+				background-color: transparent;
+				margin-top: 8px;
+				border: none;
+				border-radius: 15px;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 20px;
+				font-weight: bold;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.right-box{
+				width: 120px;
+				height: 100%;
+				text-align: right;
+				text-align: -webkit-right;
+				text-align:-moz-right;
+				display: inline-block;
+			}
+			
+			.widget-edit-box{
+				width: 45px;
+				height: 45px;
+				background-color: white;
+				position: relative;
+				display: block;
+				transition: 0.25s;
+				box-shadow: black 0 0 5px;
+				border-radius: 50%;
+				margin: 15px;
+				margin-bottom: 20px;
+				margin-left: auto;
+				cursor: pointer;
+			}
+
+			.widget-edit{
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+				border-radius: 50%;
+			}
+
+			.widget-edit-box::before{
+				content: ''; 
+    			position: absolute;
+    			width: 22px;
+				height: 3px;
+				border-radius: 2px;
+				background-color: black;
+				left: 50%;
+				top: 34%;
+				transform: translate(-50%, -50%);
+			}
+
+			.widget-edit-box::after{
+				content: ''; 
+    			position: absolute;
+    			width: 22px;
+				height: 3px;
+				border-radius: 2px;
+				background-color: black;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.widget-edit::before{
+				content: ''; 
+    			position: absolute;
+    			width: 22px;
+				height: 3px;
+				border-radius: 2px;
+				background-color: black;
+				left: 50%;
+				top: 66%;
+				transform: translate(-50%, -50%);
+			}
+			
+			.widget-reset{
+				width: 45px;
+				height: 45px;
+				background-color: white;
+				position: relative;
+				display: block;
+				transition: 0.25s;
+				box-shadow: black 0 0 5px;
+				border-radius: 50%;
+				margin: 15px;
+				margin-left: auto;
+				cursor: pointer;
+				background-size: 30px;
+				background-position: center;
+				background-repeat: no-repeat, repeat;
+				background-image: url('button_reset.svg');
+			}
+
+			.alarm-widget-popup-box{
+				width: 400px;
+				height: 485px;
+			}
+
+			.alarm-time-text{
+				float: left;
+				margin-top: 35px;
+				margin-left: 40px;
+				margin-bottom: 30px;
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 220px;
+				height: 60px;
+				font-size: 45px;
+				display: block;
+			}
+
+			.popup-replay-button{
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				top: 40px;
+				right: 35px;
+				margin-left: 0px;
+				border-radius: 50%;
+				background-repeat: no-repeat, repeat;
+				background-image: url('slider_buttons.png');
+				background-size: 280px;
+				background-position: -217px 48%;
+				display: inline-block;
+				box-shadow: black 0 0 5px;
+				transition: 0.25s;
+			}
+
+			.popup-replay-button:hover /*.widget-select:hover, .widget-select:focus*/{
+				transform: scale(1.1);
+			}
+
+			.widget-titel-label{
+				width: 120px;
+				font-size: 25px;
+				color: #474747;
+				text-shadow: none;
+				font-weight: bold;
+			}
+
+			.alarm-number-text{
+				width: 130px;
+				font-weight: bold;
+				margin-right: 5px;
+			}
+
+			.alarm-label-m{
+				width: 20px;
+			}
+
+			.widget-select{
+				padding-left: 10px;
+				padding-right: 10px;
+				background-color: white;
+				color: #001B2A;
+				outline:none;
+				border: 1px solid #ABABAB;
+				border-radius: 30px;
+				display: inline-block;
+				width: 320px;
+				height: 50px;
+				font-weight: bold;
+				font-size: 28px;
+				box-shadow: black 0 0 5px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				text-align-last: center;
+				-moz-text-align-last: center;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				cursor: pointer;
+				transition: 0.25s;
+			}
+			
+			.widget-save-button{
+				width: 130px;
+				height: 70px;
+				border-radius: 35px;
+				margin-top: 37px;
+				background-color: #006EEC;
+				font-size: 27px;
+				text-shadow: black 0 0 2px;
+				font-weight: bold;
+			}
+
+			.ticker-time-text{
+				width: 100%;
+			}
+
+			.ticker-widget-popup-box{
+				width: 400px;
+				height: 400px;
+				padding-top: 5px;
+			}
+
+			.ticker-popup-type-select{
+				width: 190px;
+			}
+
+			.ticker-time{
+				margin-top: 30px;
+				margin-bottom: 30px;
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 300px;
+				height: 60px;
+				font-size: 45px;
+				display: block;
+			}
+
+			@media all and (orientation: portrait){				
+				.settings-button{
+					margin-right: 20px;
+				}
+
+				.slider-button-box{
+					display: block;
+					width: 440px;
+					height: 440px;
+				}
+
+				.rs-handle {
+				  border: 2px solid black;
+				}
+
+				.slider-button{
+					box-shadow: black 0 0 8px;
+					border: 10px solid white;
+					cursor: auto;
+				}
+
+				.slider-button:hover{
+					transform: scale(1.0);
+				}
+
+				#button-switch{
+					width: 220px;
+					height: 220px;
+					border: 10px solid white;
+					background-size: 160px;
+					margin-left: 100px;
+					margin-top: 100px;
+				}
+
+				.switch-on {
+					box-shadow: white 0 0 20px;
+				}
+							
+				.switch-off {
+					box-shadow: black 0 0 10px;
+				}
+
+				#effects-box{
+					width: 950px;
+				}
+
+				.effects-select{
+					width: 600px;
+					border-radius: 60px;
+					height: 120px;
+					font-size: 55px;
+					box-shadow: black 0 0 6px;
+					cursor: auto;
+					transform: translate(0, -57%);
+				}
+
+				.effects-button{
+					border: 10px solid white;
+					border-radius: 50%;
+					width: 110px;
+					height: 110px;
+					box-shadow: black 0 0 8px;
+					margin: 20px;
+					cursor: auto;
+				}
+
+				#prev-effect-button:hover{
+					transform: scale(1.0);
+				}
+
+				#next-effect-button:hover{
+					transform: scale(-1.0);
+				}
+
+				#sliders-buttons-container{
+					margin: 40px auto;
+				}
+
+				#scale-box{
+					width: 400px;
+					height: 400px;
+				}
+
+				#scale-button{
+					width: 180px;
+					height: 180px;
+					margin-left: 100px;
+					margin-top: 100px;
+					background-size: 800px;
+					background-position: -410px -16px;
+				}
+
+				#sound-box{
+					width: 400px;
+					height: 400px;
+				}
+
+				#sound-button{
+					width: 180px;
+					height: 180px;
+					margin-left: 100px;
+					margin-top: 100px;
+					background-size: 800px;
+				}
+
+				.sound-on{
+					background-position: -38px -16px;
+				}
+
+				.sound-off{
+					background-position: -222px -16px;
+				}
+
+				#speed-box{
+					width: 400px;
+					height: 400px;
+				}
+
+				#speed-button{
+					width: 180px;
+					height: 180px;
+					margin-left: 100px;
+					margin-top: 100px;
+					background-size: 800px;
+					background-position: -602px -16px;
+				}
+
+				.widget {
+					width: 900px;
+					height: 280px;
+					border-radius: 50px;
+					box-shadow: black 0 0 20px;
+				}
+
+				.left-box{
+					width: 160px;
+					height: 100%;
+				}
+
+				.widget-button{		
+					width: 140px;
+					height: 140px;
+					box-shadow: black 0 0 10px;
+					margin: 75px;
+					margin-left: 20px;
+					margin-right: 0px;
+					cursor: auto;
+				}
+
+				.widget-button:hover, .widget-edit-box:hover, .widget-reset:hover{
+					transform: scale(1.0);
+				}
+
+				.start-button::before{
+	    			width: 50px;
+					height: 50px;
+					border: 2px solid black;
+				}
+
+				.stop-button::before{
+	    			width: 50px;
+					height: 52px;
+					border: 2px solid black;
+				}
+
+				.stop-button::after{
+	    			width: 51px;
+					height: 52px;
+				}
+
+				.center-box{
+					width: 570px;
+					height: 100%; 
+					transform: translate(0, -20%);
+				}
+
+				.time-text{
+					margin-top: 20px;
+					width: 200px;
+					height: 90px;
+					font-size: 80px;
+				}
+
+				.replay-button{
+					width: 40px;
+					height: 40px;
+					top: 44px;
+					margin-left: 10px;
+					border-radius: 50%;
+					background-size: 284px;
+					background-position: -226px 48%;
+				}
+
+				.replay-off{
+					border: 2px solid #ABABAB;
+				}
+
+				.replay-on{
+					border: 2px solid #006EEC;
+				}
+
+				.seconds-text{
+					width: 100%;
+					height: 40px;
+					font-size: 40px;
+				}
+
+				.bottom-center-box{
+					height: 100px;
+					width: 100%;
+					margin-top: 20px;
+				}
+
+				.minutes-text{
+					width: 80px;
+					height: 60px;
+					margin-top: 20px;
+					margin-bottom: 30px;
+					/*border: 2px solid var(--widget-text-color);*/
+					border-radius: 30px;
+					font-size: 35px;
+				}
+
+				.type-text{
+					width: 80px;
+					height: 60px;
+					margin-top: 20px;
+					margin-bottom: 30px;
+					/*border: 2px solid var(--widget-text-color);*/
+					border-radius: 30px;
+					font-size: 22px;
+				}
+
+				.effect-text{
+					width: 365px;
+					height: 60px;
+					margin: 10px;
+					margin-top: 20px;
+					margin-bottom: 30px;
+					/*border: 2px solid var(--widget-text-color);*/
+					border-radius: 30px;
+					font-size: 35px;
+				}
+
+				.right-box{
+					width: 160px;
+					height: 100%;
+					transform: translate(0, -4%);
+				}
+				
+				.widget-edit-box{	
+					width: 90px;
+					height: 90px;
+					box-shadow: black 0 0 10px;
+					border-radius: 50%;
+					margin-top: 30px;
+					margin-bottom: 40px;
+					margin-right: 20px;
+					cursor: auto;
+				}
+
+				.widget-edit-box::before{
+	    			width: 44px;
+					height: 6px;
+					border-radius: 3px;
+					top: 34%;
+				}
+
+				.widget-edit-box::after{
+	    			width: 44px;
+					height: 6px;
+					border-radius: 3px;
+				}
+
+				.widget-edit::before{
+	    			width: 44px;
+					height: 6px;
+					border-radius: 3px;
+					top: 66%;
+				}
+				
+				.widget-reset{
+					width: 90px;
+					height: 90px;
+					box-shadow: black 0 0 10px;
+					margin-bottom: 30px;
+					margin-right: 20px;
+					cursor: auto;
+					background-size: 60px;
+				}
+
+				.alarm-widget-popup-box{
+					width: 700px;
+					height: 880px;
+				}
+				
+				.alarm-time-text{
+					margin-top: 70px;
+					margin-left: 80px;
+					margin-bottom: 40px;
+					padding-left: 10px;
+					padding-right: 10px;
+					width: 380px;
+					height: 120px;
+					font-size: 90px;
+					border-radius: 60px;
+				}
+
+				.popup-replay-button{
+					width: 100px;
+					height: 100px;
+					top: 80px;
+					right: 70px;
+					margin-left: 0px;
+					border-radius: 50%;
+					background-size: 560px;
+					background-position: -434px 48%;
+					box-shadow: black 0 0 10px;
+				}
+
+				.widget-titel-label{
+					width: 230px;
+					font-size: 46px;
+				}
+
+				.alarm-label-m{
+					width: 40px;
+				}
+				
+				.alarm-number-text{
+					width: 180px;
+					font-size: 46px;
+					margin-right: 20px;
+				}
+
+				.widget-select{
+					padding-left: 20px;
+					padding-right: 20px;
+					border-radius: 50px;
+					width: 540px;
+					height: 100px;
+					font-size: 46px;
+					appearance: none;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					box-shadow: black 0 0 10px;
+					cursor: auto;
+				}
+
+				.widget-save-button{
+					width: 260px;
+					height: 140px;
+					border-radius: 70px;
+					margin-top: 60px;
+					text-shadow: black 0 0 2px;
+					font-size: 60px;
+
+				}
+
+				.ticker-time-text{
+					width: 100%;
+				}
+
+				.ticker-widget-popup-box{
+					width: 700px;
+					height: 735px;
+					padding-top: 30px;
+				}
+
+				.ticker-popup-type-select{
+					width: 310px;
+				}
+
+				.ticker-time{
+					margin-top: 40px;
+					margin-bottom: 40px;
+					padding-left: 10px;
+					padding-right: 10px;
+					width: 540px;
+					height: 120px;
+					font-size: 90px;
+					border-radius: 60px;
+				}
+			}
+		</style>
+		
+		<script type="text/javascript"> 
+			window.onload = function(){
+				var alarmWidget = document.getElementById("alarm-widget");
+				var alarmWidgetButton = document.getElementById("alarm-button");
+				var alarmTimeText = document.getElementById("alarm-time-text");
+				var alarmReplayButton = document.getElementById("alarm-replay-button");
+				var alarmTickerText = document.getElementById("alarm-seconds-text");
+				var alarmOutsetText = document.getElementById("alarm-outset");
+				var alarmModeText = document.getElementById("alarm-effect");
+				var alarmDurationText = document.getElementById("alarm-duration");
+				var alarmEditButton = document.getElementById("alarm-edit-button");
+				var alarmResetButton = document.getElementById("alarm-reset-button");
+
+				var alarmOverlay = document.getElementById("alarm-overlay");
+				var alarmClosePopUpButton = document.getElementById("alarm-close-popup");
+				var alarmPopUpTimeText = document.getElementById("alarm-popup-time-text");
+				var alarmPopUpReplayButton = document.getElementById("alarm-popup-replay-button");
+				var alarmPopUpOutsetText = document.getElementById("alarm-outset-textbox");
+				var alarmPopUpModeText = document.getElementById("alarm-effect-select");
+				var alarmPopUpDurationText = document.getElementById("alarm-duration-textbox");
+				var alarmPopUpSaveButton = document.getElementById("alarm-popup-save-button");
+
+
+				var tickerWidget = document.getElementById("ticker-widget");
+				var tickerWidgetButton = document.getElementById("ticker-button");
+				var tickerTimeText = document.getElementById("ticker-time-text");
+				var tickerTickerText = document.getElementById("ticker-seconds-text");
+				var tickerModeText = document.getElementById("ticker-effect");
+				var tickerTypeText = document.getElementById("ticker-type");
+				var tickerEditButton = document.getElementById("ticker-edit-button");
+				var tickerResetButton = document.getElementById("ticker-reset-button");
+
+				var tickerOverlay = document.getElementById("ticker-overlay");
+				var tickerClosePopUpButton = document.getElementById("ticker-close-popup");
+				var tickerTypeSelect = document.getElementById("ticker-type-select");
+				var tickerPopUpTimeText = document.getElementById("ticker-popup-time-text");
+				var tickerPopUpModeText = document.getElementById("ticker-effect-select");
+				var tickerPopUpSaveButton = document.getElementById("ticker-popup-save-button");
+
+				const OFF = 0,
+      				  ON = 1,
+      				  RUN = 2,
+      				  RESET = 3,
+      				  STOP = 4;
+
+				class AlarmWidget{
+					constructor(widget, widgetButton, timeText, replayButton, tickerText, outsetText, modeText, durationText, editButton, resetButton,
+								overlay, closePopUpButton, popUpTimeText, popUpReplayButton, popUpOutsetText, popUpModeText, popUpDurationText, popUpSaveButton){
+						
+						this.state = RESET;
+						this.replay = 0;
+						// this.time = "--:--";
+						// this.ticker = "--:--:--";
+						// this.mode = 0;
+						// this.outset = 0;
+						// this.duration = 0;
+
+						this.widget = widget;
+						this.widgetButton = widgetButton;
+						this.timeText = timeText;
+						this.replayButton = replayButton;
+						this.tickerText = tickerText;
+						this.outsetText = outsetText;
+						this.modeText = modeText;
+						this.durationText = durationText;
+						this.editButton = editButton;
+						this.resetButton = resetButton;
+
+						this.overlay = overlay;
+						this.closePopUpButton = closePopUpButton;
+						this.popUpTimeText = popUpTimeText;
+						this.popUpReplayButton = popUpReplayButton;
+						this.popUpOutsetText = popUpOutsetText;
+						this.popUpModeText = popUpModeText;
+						this.popUpDurationText = popUpDurationText;
+						this.popUpSaveButton = popUpSaveButton;
+					}
+				}
+
+				var alarm = new AlarmWidget(alarmWidget, alarmWidgetButton, alarmTimeText, alarmReplayButton, alarmTickerText, alarmOutsetText, alarmModeText, alarmDurationText, alarmEditButton, alarmResetButton,
+								alarmOverlay, alarmClosePopUpButton, alarmPopUpTimeText, alarmPopUpReplayButton, alarmPopUpOutsetText, alarmPopUpModeText, alarmPopUpDurationText, alarmPopUpSaveButton);
+
+				const NONE = 0,
+      				  ALARM = 1,
+      				  TIMER = 2;
+
+				class TickerWidget{
+					constructor(widget, widgetButton, timeText, tickerText, modeText, typeText, editButton, resetButton,
+								overlay, closePopUpButton, typeSelect, popUpTimeText, popUpModeText, popUpSaveButton){
+						
+						this.state = RESET;
+
+						this.widget = widget;
+						this.widgetButton = widgetButton;
+						this.timeText = timeText;
+						this.tickerText = tickerText;
+						this.modeText = modeText;
+						this.typeText = typeText;
+						this.editButton = editButton;
+						this.resetButton = resetButton;
+
+						this.overlay = overlay;
+						this.closePopUpButton = closePopUpButton;
+						this.typeSelect = typeSelect;
+						this.popUpTimeText = popUpTimeText;
+						this.popUpModeText = popUpModeText;
+						this.popUpSaveButton = popUpSaveButton;
+					}
+				}
+
+				var ticker = new TickerWidget(tickerWidget, tickerWidgetButton, tickerTimeText, tickerTickerText, tickerModeText, tickerTypeText, tickerEditButton, tickerResetButton,
+								tickerOverlay, tickerClosePopUpButton, tickerTypeSelect, tickerPopUpTimeText, tickerPopUpModeText, tickerPopUpSaveButton);
+
+
+				var mainSliderRadius, mainSliderWidth;
+				var sliderRadius, sliderWidth, sliderHandleSize;
+				var loadingPage = true, dataSending = false, isAlarmRun = false;
+				var sendBrightnessFlag = false, sendScaleFlag = false, sendSpeedFlag = false, sendSoundFlag = false;
+				var receivedBrightness = false, receivedScale = false, receivedSpeed = false, receivedSound = false;
+				var isLongClickEff = false, isLongClickSound = false; 
+				var alarmPopUpIsOpen = false;
+
+				var effectsSelectbox = document.getElementById("page-effects-select");		
+
+				var mql = window.matchMedia("(orientation: portrait)");
+
+				if(mql.matches) {
+					sliderHandleSize = -10;
+
+				    mainSliderRadius = 220;
+				    mainSliderWidth = 60;
+
+				 	sliderRadius = 200;
+				    sliderWidth = 60;
+				} 
+				else {
+					sliderHandleSize = -5;
+
+				    mainSliderRadius = 100;
+				    mainSliderWidth = 25;
+
+				    sliderRadius = 80;
+				    sliderWidth = 25;
+				}
+
+				mql.addListener(function(m) {
+				    if(m.matches) {
+				    	sliderHandleSize = -10;
+
+				        mainSliderRadius = 220;
+				    	mainSliderWidth = 60;
+
+				    	sliderRadius = 200;
+				    	sliderWidth = 60;
+				    }
+				    else {
+				    	sliderHandleSize = -5;
+
+				        mainSliderRadius = 100;
+				    	mainSliderWidth = 25;
+
+				    	sliderRadius = 80;
+				    	sliderWidth = 25;
+				    }
+
+				    $("#brightness-slider").roundSlider({
+					    radius: mainSliderRadius,
+					    width: mainSliderWidth,
+					    handleSize: sliderHandleSize+""
+		            });
+
+		            $("#scale-slider").roundSlider({
+					    radius: sliderRadius,
+					    width: sliderWidth,
+					    handleSize: sliderHandleSize+""
+		            });
+
+		            $("#sound-slider").roundSlider({
+					    radius: sliderRadius,
+					    width: sliderWidth,
+					    handleSize: sliderHandleSize+""
+		            });
+
+		            $("#speed-slider").roundSlider({
+					    radius: sliderRadius,
+					    width: sliderWidth,
+					    handleSize: sliderHandleSize+""
+		            });
+				});
+
+
+				$("#brightness-slider").roundSlider({
+	            	sliderType: "default",
+	            	circleShape: "pie",
+				    radius: mainSliderRadius,
+				    width: mainSliderWidth,
+				    lineCap: "round",
+				    startAngle: 315,
+				    handleSize: sliderHandleSize+"",
+
+				    min: 1,
+				    max: 60,
+				  	value: 1,
+
+					svgMode: true,
+					pathColor: "white",
+	  				rangeColor: "#006EEC",
+	  				borderColor: "#006EEC",
+					borderWidth: 0,
+	                showTooltip: false,
+
+	                valueChange: function(e) {
+	                	if(receivedBrightness){
+	                		receivedBrightness = false;
+	                		return;
+	                	}
+
+	                	if(!loadingPage) sendBrightnessFlag = true;
+					}
+	            });
+
+	            $("#scale-slider").roundSlider({
+	            	sliderType: "default",
+	            	circleShape: "pie",
+				    radius: sliderRadius,
+				    width: sliderWidth,
+				    lineCap: "round",
+				    startAngle: 315,
+				    handleSize: sliderHandleSize+"",
+
+				    min: 0,
+				    max: 255,
+				  	value: 0,
+
+					svgMode: true,
+					pathColor: "white",
+	  				rangeColor: "#006EEC",
+	  				borderColor: "#006EEC",
+					borderWidth: 0,
+	                showTooltip: false,
+
+	                valueChange: function(e) {
+	                	if(receivedScale){
+	                		receivedScale = false;
+	                		return;
+	                	}
+
+						if(!loadingPage) sendScaleFlag = true;
+					}
+	            });
+
+	            $("#sound-slider").roundSlider({
+	            	sliderType: "default",
+	            	circleShape: "pie",
+				    radius: sliderRadius,
+				    width: sliderWidth,
+				    lineCap: "round",
+				    startAngle: 315,
+				    handleSize: sliderHandleSize+"",
+
+				    min: 1,
+				    max: 15,
+				  	value: 1,
+
+					svgMode: true,
+					pathColor: "white",
+	  				rangeColor: "#006EEC",
+	  				borderColor: "#006EEC",
+					borderWidth: 0,
+	                showTooltip: false,
+
+	                valueChange: function(e) {
+	                	if(receivedSound){
+	                		receivedSound = false;
+	                		return;
+	                	}
+
+	                	if(!loadingPage) sendSoundFlag = true;
+					}
+	            });
+
+	            $("#speed-slider").roundSlider({
+	            	sliderType: "default",
+	            	circleShape: "pie",
+				    radius: sliderRadius,
+				    width: sliderWidth,
+				    lineCap: "round",
+				    startAngle: 315,
+				    handleSize: sliderHandleSize+"",
+
+				    min: 0,
+				    max: 255,
+				  	value: 0,
+
+					svgMode: true,
+					pathColor: "white",
+	  				rangeColor: "#006EEC",
+	  				borderColor: "#006EEC",
+					borderWidth: 0,
+	                showTooltip: false,
+
+	                valueChange: function(e) {
+	                	if(receivedSpeed){
+	                		receivedSpeed = false;
+	                		return;
+	                	}
+
+	                	if(!loadingPage) sendSpeedFlag = true;
+					}
+	            });
+
+				var buttonSwitch = document.getElementById("button-switch");
+				var buttonState = 0;
+				var scaleButton = document.getElementById("scale-button");	
+				var speedButton = document.getElementById("speed-button");	
+				var soundButton = document.getElementById("sound-button");
+				var soundState = 0;
+				var prevEffectButton = document.getElementById("prev-effect-button");
+				var nextEffectButton = document.getElementById("next-effect-button");
+
+				var brightnessSlider = $("#brightness-slider").data("roundSlider");
+				var scaleSlider = $("#scale-slider").data("roundSlider");
+				var soundSlider = $("#sound-slider").data("roundSlider");
+				var speedSlider = $("#speed-slider").data("roundSlider");
+				
+				getStatus();
+
+				function getStatus(){
+					var now = new Date;
+					var UTC_Time = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds()).toString().substring(0, 10);
+					// console.log(UTC_Time);
+					var request = new XMLHttpRequest();
+					request.open('GET','/get_status?time=' + UTC_Time, true);
+								
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200 && !dataSending){
+							var jsonConfig = JSON.parse(request.responseText);
+
+							if(jsonConfig.alarm_state == 2) isAlarmRun = true;
+							else isAlarmRun = false;
+
+							buttonState = jsonConfig.state;
+							if(buttonState == 0){
+								buttonSwitch.classList.remove('switch-on');
+								buttonSwitch.classList.add('switch-off');
+							}
+							else if(buttonState == 1){
+								buttonSwitch.classList.remove('switch-off');
+								buttonSwitch.classList.add('switch-on');
+							}
+
+							if(brightnessSlider.getValue() != jsonConfig.brightness){
+								receivedBrightness = true;
+								brightnessSlider.setValue(jsonConfig.brightness);
+							}
+
+							effectsSelectbox.value = jsonConfig.current_effect;
+
+							$("#scale-slider").roundSlider({
+								min: jsonConfig.min_scale,
+								max: jsonConfig.max_scale
+					        });
+					            
+					        $("#speed-slider").roundSlider({
+								min: jsonConfig.min_speed,
+								max: jsonConfig.max_speed
+					        });
+
+					        if(scaleSlider.getValue() != jsonConfig.scale){
+					        	receivedScale = true;
+					        	scaleSlider.setValue(jsonConfig.scale);
+					        }
+							if(speedSlider.getValue() != jsonConfig.speed){
+								receivedSpeed = true;
+								speedSlider.setValue(jsonConfig.speed);
+							}
+							if(soundSlider.getValue() != jsonConfig.volume){
+								receivedSound = true;
+								soundSlider.setValue(jsonConfig.volume);
+							}
+							soundState = jsonConfig.sound_state;
+							if(soundState == 0){
+								soundButton.classList.remove('sound-on');
+								soundButton.classList.add('sound-off');
+							}
+							else if(soundState == 1){
+								soundButton.classList.remove('sound-off');
+								soundButton.classList.add('sound-on');
+							}
+
+							if(alarm.state != jsonConfig.alarm_state){
+								alarm.state = jsonConfig.alarm_state;
+								if(alarm.state == OFF || alarm.state == RESET){
+									alarm.widgetButton.classList.remove('start-button');
+									alarm.widgetButton.classList.add('stop-button');
+								}
+								else if(alarm.state == ON || alarm.state == RUN){
+									alarm.widgetButton.classList.remove('stop-button');
+									alarm.widgetButton.classList.add('start-button');
+								}
+							}
+							if(!alarmPopUpIsOpen){
+								alarm.replay = jsonConfig.alarm_replay;
+								if(alarm.replay == 1){
+									alarm.replayButton.classList.remove('replay-off');
+									alarm.replayButton.classList.add('replay-on');
+								}
+								else if(alarm.replay == 0){
+									alarm.replayButton.classList.remove('replay-on');
+									alarm.replayButton.classList.add('replay-off');
+								}
+							}
+							if(alarm.state != RESET){
+								//if(alarm.modeText.value != effectsSelectbox.options[jsonConfig.alarm_effect_id].text) alarm.modeText.value = effectsSelectbox.options[jsonConfig.alarm_effect_id].text;
+								if(alarm.modeText.value != alarm.popUpModeText.options[getSelectBoxIndex(alarm.popUpModeText, jsonConfig.alarm_effect_id)].text) 
+									alarm.modeText.value = alarm.popUpModeText.options[getSelectBoxIndex(alarm.popUpModeText, jsonConfig.alarm_effect_id)].text;
+							}
+							else{
+								alarm.modeText.value = jsonConfig.alarm_effect_id;
+							}
+							if(alarm.timeText.value != jsonConfig.alarm_time) alarm.timeText.value = jsonConfig.alarm_time;
+							if(alarm.tickerText.value != jsonConfig.alarm_ticker) alarm.tickerText.value = jsonConfig.alarm_ticker;
+							if(alarm.outsetText.value != jsonConfig.alarm_outset + " m") alarm.outsetText.value = jsonConfig.alarm_outset + " m";
+							if(alarm.durationText.value != jsonConfig.alarm_duration + " m") alarm.durationText.value = jsonConfig.alarm_duration + " m";
+
+
+							if(ticker.state != jsonConfig.ticker_state){
+								ticker.state = jsonConfig.ticker_state;
+								if(ticker.state == OFF || ticker.state == RESET){
+									ticker.widgetButton.classList.remove('start-button');
+									ticker.widgetButton.classList.add('stop-button');
+								}
+								else if(ticker.state == ON || ticker.state == RUN){
+									ticker.widgetButton.classList.remove('stop-button');
+									ticker.widgetButton.classList.add('start-button');
+								}
+							}
+							
+							if(ticker.state != RESET){
+								if(ticker.modeText.value != ticker.popUpModeText.options[getSelectBoxIndex(ticker.popUpModeText, jsonConfig.ticker_mode)].text) 
+									ticker.modeText.value = ticker.popUpModeText.options[getSelectBoxIndex(ticker.popUpModeText, jsonConfig.ticker_mode)].text;
+								if(ticker.typeText.value != ticker.typeSelect.options[getSelectBoxIndex(ticker.typeSelect, jsonConfig.ticker_type)].text) 
+									ticker.typeText.value = ticker.typeSelect.options[getSelectBoxIndex(ticker.typeSelect, jsonConfig.ticker_type)].text;
+							}
+							else{
+								ticker.modeText.value = jsonConfig.ticker_mode;
+								ticker.typeText.value = jsonConfig.ticker_type;
+							}
+							if(ticker.timeText.value != jsonConfig.ticker_time) ticker.timeText.value = jsonConfig.ticker_time;
+							if(ticker.tickerText.value != jsonConfig.ticker_ticker) ticker.tickerText.value = jsonConfig.ticker_ticker;
+		
+
+							if(loadingPage){
+								effectsSelectbox.style.color = "var(--background-color)";
+								loadingPage = false;
+							}
+						}
+					}
+					request.send();
+				}
+
+				function getSelectBoxIndex(_selectBox, _value){
+					for(var i = 0; i < _selectBox.length; i++){
+						if(_selectBox.options[i].value == _value) return i;
+					}
+				}
+
+				function sendRequest(requestText, object){
+					//if(isAlarmRun) return;
+
+					var prevColor = object.style.backgroundColor;
+					object.style.backgroundColor = "#6E6D6D";
+					dataSending = true;
+					var request = new XMLHttpRequest();
+					request.open('GET','/' + requestText, true);
+						
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							dataSending = false;
+							object.style.backgroundColor = prevColor;
+						}
+					}
+					request.send();	
+				}
+				
+				function setBrightness(){
+					if(isAlarmRun) return;
+
+					if(sendBrightnessFlag){	
+						sendBrightnessFlag = false;
+						dataSending = true;
+						var request = new XMLHttpRequest();
+						request.open('GET','/set_brightness?value=' + brightnessSlider.getValue(), true);
+						
+						request.onload = function(){
+							if (request.readyState == 4 && request.status == 200){
+								dataSending = false;
+							}
+						}
+						request.send();
+					}	
+				}
+
+				function buttonSwitchFun(){
+					//if(isAlarmRun) return;
+
+					if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { } 
+					else {
+					    if(isLongClickSound){
+					    	isLongClickSound = false;
+					    	return;
+					    }
+					}
+
+					dataSending = true;
+					var value = 0;
+					if(buttonState == 0) value = 1;
+					else if(buttonState == 1) value = 0;
+					
+					var request = new XMLHttpRequest();
+					request.open('GET','/set_state?value=' + value, false);
+					request.send();
+					
+					if (request.readyState == 4 && request.status == 200){
+						if (request.responseText  == '0'){
+							buttonSwitch.classList.remove('switch-on');
+							buttonSwitch.classList.add('switch-off');
+							buttonState = 0;
+						} 
+						else {
+							buttonSwitch.classList.remove('switch-off');
+							buttonSwitch.classList.add('switch-on');
+							buttonState = 1;
+						}
+						dataSending = false;
+					}
+				}
+
+				function setEffect(){
+					//if(isAlarmRun) return;
+
+					dataSending = true;
+					var request = new XMLHttpRequest();
+					request.open('GET','/set_effect?value=' + effectsSelectbox.options[effectsSelectbox.options.selectedIndex].value, true);
+					
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							dataSending = false;
+							prevEffectButton.style.backgroundColor = "transparent";
+							nextEffectButton.style.backgroundColor = "transparent";
+						}
+					}
+					request.send();
+				}
+
+				function prevEffect(){
+					//if(isAlarmRun) return;
+
+					prevEffectButton.style.backgroundColor = "#ABABAB";
+					var currentEffect = parseInt(effectsSelectbox.options[effectsSelectbox.options.selectedIndex].value);
+
+					if(currentEffect - 1 >= 0) effectsSelectbox.value = currentEffect - 1;
+					else effectsSelectbox.value = 17;
+
+					setEffect();
+				}
+
+				function nextEffect(){
+					//if(isAlarmRun) return;
+
+					nextEffectButton.style.backgroundColor = "#ABABAB";
+					var currentEffect = parseInt(effectsSelectbox.options[effectsSelectbox.options.selectedIndex].value);
+
+					if(currentEffect + 1 <= 17) effectsSelectbox.value = currentEffect + 1;
+					else effectsSelectbox.value = 0;
+
+					setEffect();
+				}
+
+				function setScale(){
+					//if(isAlarmRun) return;
+
+					if(sendScaleFlag){	
+						sendScaleFlag = false;
+						dataSending = true;
+						var request = new XMLHttpRequest();
+						request.open('GET','/set_scale?value=' + scaleSlider.getValue(), true);
+						
+						request.onload = function(){
+							if (request.readyState == 4 && request.status == 200){
+								dataSending = false;
+							}
+						}
+						request.send();
+					}	
+				}
+
+				function setSpeed(){
+					//if(isAlarmRun) return;
+
+					if(sendSpeedFlag){	
+						sendSpeedFlag = false;
+						dataSending = true;
+						var request = new XMLHttpRequest();
+						request.open('GET','/set_speed?value=' + speedSlider.getValue(), true);
+						
+						request.onload = function(){
+							if (request.readyState == 4 && request.status == 200){
+								dataSending = false;
+							}
+						}
+						request.send();
+					}	
+				}
+
+				function setSound(){
+					if(isAlarmRun) return;
+
+					if(sendSoundFlag){	
+						sendSoundFlag = false;
+						dataSending = true;
+						var request = new XMLHttpRequest();
+						request.open('GET','/set_volume?value=' + soundSlider.getValue(), true);
+						
+						request.onload = function(){
+							if (request.readyState == 4 && request.status == 200){
+								dataSending = false;
+							}
+						}
+						request.send();
+					}	
+				}
+
+				function soundButtonClick(){
+					//if(isAlarmRun) return;
+
+					if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { } 
+					else {
+					    if(isLongClickSound){
+					    	isLongClickSound = false;
+					    	return;
+					    }
+					}
+
+					soundButton.style.backgroundColor = "#ABABAB";
+					dataSending = true;
+					var value = 0;
+					if(soundState == 0) value = 1;
+					else if(soundState == 1) value = 0;
+					
+					var request = new XMLHttpRequest();
+					request.open('GET','/set_sound_state?value=' + value, true);
+					
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							if (request.responseText  == '0'){
+								soundButton.classList.remove('sound-on');
+								soundButton.classList.add('sound-off');
+								soundState = 0;
+							} 
+							else {
+								soundButton.classList.remove('sound-off');
+								soundButton.classList.add('sound-on');
+								soundState = 1;
+							}
+							dataSending = false;
+							soundButton.style.backgroundColor = "transparent";
+						}
+					}
+					request.send();
+				}
+
+				var timerId = setInterval(() => getStatus(), 1000);
+				var setBrightnesTimerId = setInterval(() => setBrightness(), 150);
+				var setScaleTimerId = setInterval(() => setScale(), 150);
+				var setSpeedTimerId = setInterval(() => setSpeed(), 150);
+				var setSoundTimerId = setInterval(() => setSound(), 150);
+
+				alarm.widgetButton.addEventListener('click', function(){
+					if(alarm.state != RESET){
+						if(alarm.state == OFF) alarm.state = ON;
+						else if(alarm.state == ON) alarm.state = OFF;
+						else if(alarm.state == RUN) alarm.state = STOP;
+
+						var request = new XMLHttpRequest();
+						request.open('GET', 'set_alarm_state?value=' + alarm.state, false);
+						request.send();
+					
+						if(request.readyState == 4 && request.status == 200){
+							if(request.responseText == OFF || request.responseText == RESET){
+								alarm.widgetButton.classList.remove('start-button');
+								alarm.widgetButton.classList.add('stop-button');
+							}
+							else if(request.responseText == ON || request.responseText == RUN){
+								alarm.widgetButton.classList.remove('stop-button');
+								alarm.widgetButton.classList.add('start-button');
+							}
+						}
+					}
+				});
+
+				alarm.resetButton.addEventListener('click', function(){
+					alarm.state = RESET;
+
+					var request = new XMLHttpRequest();
+					request.open('GET', 'set_alarm_state?value=' + alarm.state, false);
+					request.send();
+					
+					if(request.readyState == 4 && request.status == 200){
+						if(request.responseText == RESET){
+							alarm.widgetButton.classList.remove('start-button');
+							alarm.widgetButton.classList.add('stop-button');
+						}
+					}
+				});
+
+				alarm.editButton.addEventListener('click', function(){
+					alarmPopUpIsOpen = true;
+
+					alarm.popUpTimeText.value = alarm.timeText.value;
+					if(alarm.replay == 1){
+						alarm.popUpReplayButton.classList.remove('replay-off');
+						alarm.popUpReplayButton.classList.add('replay-on');
+					}
+					else if(alarm.replay == 0){
+						alarm.popUpReplayButton.classList.remove('replay-on');
+						alarm.popUpReplayButton.classList.add('replay-off');
+					}
+					alarm.popUpOutsetText.value = alarm.outsetText.value.substring(0, alarm.outsetText.value.length - 2);
+					if(alarm.modeText.value == "-----") alarm.popUpModeText.selectedIndex = -1;
+					else alarm.popUpModeText.selectedIndex = getSelectBoxIndexByText(alarm.popUpModeText, alarm.modeText.value);
+					alarm.popUpDurationText.value = alarm.durationText.value.substring(0, alarm.outsetText.value.length - 2);
+					// var _outsetText = alarm.outsetText.value.substring(0, alarm.outsetText.value.length - 1);
+					// if(_outsetText != "--") alarm.popUpOutsetText.value = _outsetText;
+					// else alarm.popUpOutsetText.value = "1";
+					alarm.overlay.style.display="block";
+				});
+
+				function getSelectBoxIndexByText(_selectBox, _text){
+					for(var i = 0; i < _selectBox.length; i++){
+						if(_selectBox.options[i].text == _text) return i;
+					}
+				}
+
+
+				alarm.popUpReplayButton.addEventListener('click', function(){
+					if(alarm.replay == 0){
+						alarm.replay = 1;
+						alarm.popUpReplayButton.classList.remove('replay-off');
+						alarm.popUpReplayButton.classList.add('replay-on');
+					}
+					else if(alarm.replay == 1){
+						alarm.replay = 0;
+						alarm.popUpReplayButton.classList.remove('replay-on');
+						alarm.popUpReplayButton.classList.add('replay-off');
+					}
+				});
+
+				alarm.popUpOutsetText.addEventListener('change', function(){
+					if(alarm.popUpOutsetText.value < 1 || alarm.popUpOutsetText.value.indexOf(".") >= 0){
+						alarm.popUpOutsetText.value = 1;
+					}
+					else if(alarm.popUpOutsetText.value > 10){
+						alarm.popUpOutsetText.value = 10;
+					}
+				});
+
+				alarm.popUpDurationText.addEventListener('change', function(){
+					if(alarm.popUpDurationText.value < 1 || alarm.popUpDurationText.value.indexOf(".") >= 0){
+						alarm.popUpDurationText.value = 1;
+					}
+					else if(alarm.popUpDurationText.value > 10){
+						alarm.popUpDurationText.value = 10;
+					}
+				});
+
+				alarm.popUpSaveButton.addEventListener('click', function(){
+					if(alarm.popUpModeText.selectedIndex >= 0 && checkInputNumbers() && checkInputTime(alarm.popUpTimeText)){
+						var request = new XMLHttpRequest();
+						var json = "/set_alarm?json=" + JSON.stringify({"state":1, "replay": alarm.replay, "effect_id":parseInt(alarm.popUpModeText.value), 
+								   "time":alarm.popUpTimeText.value,"outset":parseInt(alarm.popUpOutsetText.value),"duration":parseInt(alarm.popUpDurationText.value)});
+
+						request.open('GET', json, false);
+						request.send();
+						
+						if (request.readyState == 4 && request.status == 200){
+							alarmPopUpIsOpen = false;
+							alarm.overlay.style.display="none";
+						}
+					}
+					else alert("Incorrect input. Please check the data and try again");
+				});
+
+				var numberStr = "0123456789";
+
+				function checkInputNumbers(){
+					var _outsetStr = alarm.popUpOutsetText.value;
+					var _durationStr = alarm.popUpDurationText.value;
+
+					if(_outsetStr.length == 0 || _durationStr.length == 0) return false;
+
+					for(var i = 0; i < _outsetStr.length; i++){
+						if(numberStr.indexOf(_outsetStr[i]) < 0)
+							return false;
+					}
+					
+					for(var i = 0; i < _durationStr.length; i++){
+						if(numberStr.indexOf(_durationStr[i]) < 0)
+							return false;
+					}
+
+					var _outset = parseInt(_outsetStr);
+					if(_outset < 0 || _outset > 10) return false;
+
+					var _duration = parseInt(_durationStr);
+					if(_duration < 0 || _duration > 10) return false;
+
+					return true;
+				}
+
+				function checkInputTime(_timeInputBox){
+					var str = _timeInputBox.value;
+
+					if(str.length < 5) return false;
+
+					var _hoursStr = str.substring(0, 2);
+					for(var i = 0; i < _hoursStr.length; i++){
+						if(numberStr.indexOf(_hoursStr[i]) < 0)
+							return false;
+					}
+
+					var _hours = parseInt(_hoursStr);
+					if(_hours >= 24) return false;
+
+					if(str[2] != ":") return false;
+
+					var _minutesStr = str.substring(3, 4);
+					for(var i = 0; i < _minutesStr.length; i++){
+						if(numberStr.indexOf(_minutesStr[i]) < 0)
+							return false;
+					}
+
+					var _minutes = parseInt(_minutesStr);
+					if(_minutes >= 60) return false;
+
+					if(_timeInputBox.step != 0){
+						if(str.length < 8){
+							if(str.length == 5){
+								_timeInputBox.value += ":00";
+								str = _timeInputBox.value;
+							}
+							else return false;
+						}
+
+						if(str[5] != ":") return false;
+
+						var _secondsStr = str.substring(6, 7);
+						for(var i = 0; i < _secondsStr.length; i++){
+							if(numberStr.indexOf(_secondsStr[i]) < 0)
+								return false;
+						}
+
+						var _seconds = parseInt(_secondsStr);
+						if(_seconds >= 60) return false;
+					}
+
+					return true;
+				}
+
+				alarm.closePopUpButton.addEventListener('click', function(){
+					alarmPopUpIsOpen = false;
+					alarm.overlay.style.display="none";
+				});
+
+
+				ticker.widgetButton.addEventListener('click', function(){
+					if(ticker.state != RESET){
+						if(ticker.state == OFF) ticker.state = ON;
+						else if(ticker.state == ON) ticker.state = OFF;
+						else if(ticker.state == RUN) ticker.state = STOP;
+
+						var request = new XMLHttpRequest();
+						request.open('GET', 'set_ticker_state?value=' + ticker.state, false);
+						request.send();
+					
+						if(request.readyState == 4 && request.status == 200){
+							if(request.responseText == OFF || request.responseText == RESET){
+								ticker.widgetButton.classList.remove('start-button');
+								ticker.widgetButton.classList.add('stop-button');
+							}
+							else if(request.responseText == ON || request.responseText == RUN){
+								ticker.widgetButton.classList.remove('stop-button');
+								ticker.widgetButton.classList.add('start-button');
+							}
+						}
+					}
+				});
+
+				ticker.resetButton.addEventListener('click', function(){
+					ticker.state = RESET;
+
+					var request = new XMLHttpRequest();
+					request.open('GET', 'set_ticker_state?value=' + ticker.state, false);
+					request.send();
+					
+					if(request.readyState == 4 && request.status == 200){
+						if(request.responseText == RESET){
+							ticker.widgetButton.classList.remove('start-button');
+							ticker.widgetButton.classList.add('stop-button');
+						}
+					}
+				});
+
+				ticker.editButton.addEventListener('click', function(){
+					if(ticker.typeText.value == "-----") ticker.typeSelect.selectedIndex = -1;
+					else ticker.typeSelect.selectedIndex = getSelectBoxIndexByText(ticker.typeSelect, ticker.typeText.value);
+
+					tickerTypeChange();
+
+					if(ticker.modeText.value == "-----") ticker.popUpModeText.selectedIndex = -1;
+					else ticker.popUpModeText.selectedIndex = getSelectBoxIndexByText(ticker.popUpModeText, ticker.modeText.value);
+
+					ticker.overlay.style.display="block";
+				});
+
+
+				ticker.typeSelect.addEventListener('change', tickerTypeChange);
+
+				function tickerTypeChange(){
+					if(ticker.typeSelect.selectedIndex == 1) ticker.popUpTimeText.value = ticker.tickerText.value;
+					else ticker.popUpTimeText.value = ticker.timeText.value;
+				}
+
+
+				ticker.popUpSaveButton.addEventListener('click', function(){
+					if(ticker.typeSelect.selectedIndex >= 0 && ticker.popUpModeText.selectedIndex >= 0 && checkInputTime(ticker.popUpTimeText)){
+						var request = new XMLHttpRequest();
+						var json = "/set_ticker?json=" + JSON.stringify({"state":1, "type":parseInt(ticker.typeSelect.value), "mode":parseInt(ticker.popUpModeText.value), 
+								   "time":ticker.popUpTimeText.value});
+
+						request.open('GET', json, false);
+						request.send();
+						
+						if (request.readyState == 4 && request.status == 200){
+							ticker.overlay.style.display="none";
+						}
+					}
+					else alert("Incorrect input. Please check the data and try again");
+				});
+
+				ticker.closePopUpButton.addEventListener('click', function(){
+					ticker.overlay.style.display="none";
+				});
+
+				document.querySelector('body').addEventListener('click', e => {
+				  	if(e.target == alarm.overlay && alarmPopUpIsOpen){
+						alarmPopUpIsOpen = false;
+						alarm.overlay.style.display="none";
+					}
+					else if(e.target == ticker.overlay){
+						ticker.overlay.style.display="none";
+					}
+				});
+				
+				buttonSwitch.addEventListener('click', buttonSwitchFun);
+				buttonSwitch.addEventListener('long-press', function(e) {
+					isLongClickSound = true;
+					sendRequest("set_default_effect", buttonSwitch);
+				});
+				effectsSelectbox.addEventListener('change', setEffect);
+				prevEffectButton.addEventListener('click', prevEffect);
+				nextEffectButton.addEventListener('click', nextEffect);
+				soundButton.addEventListener('click', soundButtonClick);
+				soundButton.addEventListener('long-press', function(e) {
+					if(isAlarmRun) return;
+					isLongClickSound = true;
+					sendRequest("set_default_volume", soundButton);
+				});
+				scaleButton.addEventListener('long-press', function(e) {
+					sendRequest("set_default_scale", scaleButton);
+				});
+				speedButton.addEventListener('long-press', function(e) {
+					sendRequest("set_default_speed", speedButton);
+				});
+			}
+		</script>
+	</head>
+	
+	<body>
+		<div id="box">
+			<input type="button" class="image-button settings-button" onclick="location.href='/settings.html'"/>
+			<h1 class="page-titel"><strong>MaxLamp</strong></h1>
+			<div class="slider-button-box" id="brightness-switch-box">
+			    <div id="brightness-slider"></div>
+			    <div class="button slider-button switch-off" id="button-switch" data-long-press-delay="500"></div>		    
+			</div>
+			<div id="effects-box">
+				<div type="button" id="prev-effect-button" class="effects-button"></div>
+				<select class="effects-select" id="page-effects-select">
+					<option value="0">Colored light</option>
+					<option value="1">Fire</option>
+					<option value="2">Lava</option>
+					<option value="3">Ocean</option>
+					<option value="4">Sky</option>
+					<option value="5">Forest</option>
+					<option value="6">Fireflies</option>
+					<option value="7">Sparkles</option>
+					<option value="8">Rainbow (vertical)</option>
+					<option value="9">Rainbow (horizontal)</option>
+					<option value="10">Rainbow (3D)</option>
+					<option value="11">Rainbow stripe</option>
+					<option value="12">Plasma</option>
+					<option value="13">Crazy colors</option>
+					<option value="14">Rain</option>
+					<option value="15">Snow</option>
+					<option value="16">Matrix</option>
+					<option value="17">Audio analyzer</option>
+				</select>
+				<div id="next-effect-button" class="effects-button"></div>
+			</div>
+			<div id="sliders-buttons-container">
+				<div id="scale-box" class="slider-button-box">
+				    <div id="scale-slider"></div>
+				    <div type="button" id="scale-button" class="button slider-button" data-long-press-delay="500"></div>		    
+				</div>
+				<div id="speed-box" class="slider-button-box">
+				    <div id="speed-slider"></div>
+				    <div id="speed-button" class="button slider-button" data-long-press-delay="500"></div>		    
+				</div>
+				<div id="sound-box" class="slider-button-box">
+				    <div id="sound-slider"></div>
+				    <div id="sound-button" class="button slider-button sound-off" data-long-press-delay="500"></div>		    
+				</div>
+			</div>
+
+			<div class="widget" id="alarm-widget">
+				<div class="left-box">
+					<div class="widget-button stop-button" id="alarm-button"></div>
+				</div>
+				<div class="center-box">
+					<input type="text" class="time-text" id="alarm-time-text" readonly value="--:--"/>
+					<div class="replay-button replay-off" id="alarm-replay-button"></div>
+					<input type="text" class="seconds-text" id="alarm-seconds-text" readonly value="--:--:--"/>
+					<div class="bottom-center-box"> 
+						<input type="text" class="minutes-text" id="alarm-outset" readonly value="-- m"/>
+						<input type="text" class="effect-text" id="alarm-effect" readonly value="-----"/>
+						<input type="text" class="minutes-text" id="alarm-duration" readonly value="-- m"/>
+					</div>
+				</div>
+				<div class="right-box">
+					<div class="widget-edit-box" id="alarm-edit-button">
+						<div class="widget-edit"></div>
+					</div>
+					<dix class="widget-reset" id="alarm-reset-button"></dix>
+				</div>
+			</div>
+
+			<div class="overlay" id="alarm-overlay">
+				<div class="popup alarm-widget-popup-box">
+					<div class="close-popup" id="alarm-close-popup">&times;</div>
+					<input type="time" step="0" value="00:00" class="input-text alarm-time-text" id="alarm-popup-time-text"/>
+					<div class="popup-replay-button replay-off" id="alarm-popup-replay-button"></div>
+					<div class="group">
+						<label for="alarm-outset-textbox" class="titel-label widget-titel-label">Outset:</label>
+						<input type="number" step="1" min="1" max="10" value="1" class="input-text alarm-number-text" id="alarm-outset-textbox"/>
+						<label for="alarm-outset-textbox" class="titel-label widget-titel-label alarm-label-m">m</label>
+					</div>
+					<div class="group">
+						<!-- <label for="alarm-effect-select" class="titel-label alarm-titel-label">Effect:</label> -->
+						<select class="widget-select" id="alarm-effect-select">
+							<option value="0">Colored light</option>
+							<option value="1">Fire</option>
+							<option value="2">Lava</option>
+							<option value="3">Ocean</option>
+							<option value="4">Sky</option>
+							<option value="5">Forest</option>
+							<option value="6">Fireflies</option>
+							<option value="7">Sparkles</option>
+							<option value="8">Rainbow (vertical)</option>
+							<option value="9">Rainbow (horizontal)</option>
+							<option value="10">Rainbow (3D)</option>
+							<option value="11">Rainbow stripe</option>
+							<option value="12">Plasma</option>
+							<option value="13">Crazy colors</option>
+							<option value="14">Rain</option>
+							<option value="15">Snow</option>
+							<option value="16">Matrix</option>
+						</select>
+					</div>
+					<div class="group">
+						<label for="alarm-duration-textbox" class="titel-label widget-titel-label">Duration:</label>
+						<input type="number" step="1" min="1" max="10" value="1" class="input-text alarm-number-text" id="alarm-duration-textbox"/>
+						<label for="alarm-duration-textbox" class="titel-label widget-titel-label alarm-label-m">m</label>
+					</div>
+					<input type="button" class="button widget-save-button" id="alarm-popup-save-button" value="Save"/>
+				</div>
+			</div>
+
+
+
+			<div class="widget" id="ticker-widget">
+				<div class="left-box">
+					<div class="widget-button stop-button" id="ticker-button"></div>
+				</div>
+				<div class="center-box">
+					<input type="text" class="time-text ticker-time-text" id="ticker-time-text" readonly value="--:--:--"/>
+					<input type="text" class="seconds-text" id="ticker-seconds-text" readonly value="--:--:--"/>
+					<div class="bottom-center-box"> 
+						<input type="text" class="type-text" readonly value=""/>
+						<input type="text" class="effect-text" id="ticker-effect" readonly value="-----"/>
+						<input type="text" class="type-text" id="ticker-type" readonly value="-----"/>
+					</div>
+				</div>
+				<div class="right-box">
+					<div class="widget-edit-box" id="ticker-edit-button">
+						<div class="widget-edit"></div>
+					</div>
+					<dix class="widget-reset" id="ticker-reset-button"></dix>
+				</div>
+			</div>
+
+			<div class="overlay" id="ticker-overlay">
+				<div class="popup ticker-widget-popup-box">
+					<div class="close-popup" id="ticker-close-popup">&times;</div>
+					<div class="group">
+						<label for="ticker-type-select" class="titel-label widget-titel-label">Type:</label>
+						<select class="widget-select ticker-popup-type-select" id="ticker-type-select">
+							<option value="1">ALARM</option>
+							<option value="2">TIMER</option>
+						</select>
+					</div>
+					<input type="time" step="1" value="00:00:00" class="input-text ticker-time" id="ticker-popup-time-text"/>
+					<div class="group">
+						<!-- <label for="ticker-effect-select" class="titel-label alarm-titel-label">Effect:</label> -->
+						<select class="widget-select" id="ticker-effect-select">
+							<option value="20">OFF</option>
+							<option value="0">Colored light</option>
+							<option value="1">Fire</option>
+							<option value="2">Lava</option>
+							<option value="3">Ocean</option>
+							<option value="4">Sky</option>
+							<option value="5">Forest</option>
+							<option value="6">Fireflies</option>
+							<option value="7">Sparkles</option>
+							<option value="8">Rainbow (vertical)</option>
+							<option value="9">Rainbow (horizontal)</option>
+							<option value="10">Rainbow (3D)</option>
+							<option value="11">Rainbow stripe</option>
+							<option value="12">Plasma</option>
+							<option value="13">Crazy colors</option>
+							<option value="14">Rain</option>
+							<option value="15">Snow</option>
+							<option value="16">Matrix</option>
+							<option value="17">Audio analyzer</option>
+						</select>
+					</div>
+					<input type="button" class="button widget-save-button" id="ticker-popup-save-button" value="Save"/>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>

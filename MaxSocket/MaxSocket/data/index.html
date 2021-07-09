@@ -1,0 +1,946 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>MaxSocket | Homepage</title>
+		<meta charset="utf-8"/>
+		<link rel="shortcut icon" href="esp.png" type="image/png">
+		<!-- <link rel="icon" href="esp.ico" type="images/x-icon"> -->
+		<link rel="stylesheet" href="theme.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		
+    	<style type="text/css">
+			.settings-button{
+				right: 0%;
+				margin-right: 15px;
+				background-image: url('button_settings.png');
+			}
+
+			
+			#button-switch{
+				margin-bottom: 100px;
+				width: 160px;
+				height: 110px;
+				border-radius: 60px;
+				border: 7px solid white;
+				background-image: url('button_switch.png');
+				background-repeat: no-repeat, repeat;
+				background-position: center;
+				background-size: 80px;
+			}
+
+			.switch-on {
+				background-color: #006EEC;
+				box-shadow: white 0 0 10px;
+			}
+						
+			.switch-off {
+				background-color: #ABABAB;
+				box-shadow: black 0 0 6px;
+			}	
+
+
+			.widget {
+				margin: 40px auto;
+				width: 600px;
+				height: 140px;
+				box-sizing: border-box;
+				background-color: rgba(255, 255, 255, 0.7);
+				border-radius: 30px;
+				display: block;
+				box-shadow: black 0 0 10px;
+				transition: 0.25s;
+			}
+
+			.left-box{
+				width: 120px;
+				height: 100%;
+				display: inline-block;
+			}
+
+			.widget-button{		
+				width: 80px;
+				height: 80px;
+				background-color: white;
+				position: relative;
+				display: inline-block;
+				transition: 0.25s;
+				box-shadow: black 0 0 5px;
+				margin: 30px;
+				margin-left: 20px;
+				border-radius: 50%;
+				cursor: pointer;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+			}
+
+			.widget-button:hover, .widget-edit-box:hover, .widget-reset:hover{
+				transform: scale(1.1);
+			}
+
+			.start-button{
+
+			}
+
+			.start-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 30px;
+				height: 30px;
+				border: 1px solid black;
+				border-radius: 15%;
+				background-color: #006EEC;
+				left: 50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.stop-button{
+
+			}
+
+			.stop-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 31px;
+				height: 32px;
+				border: 1px solid black;
+				background-color: black;
+				clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				-webkit-clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				border-radius: 15%;
+				left: 50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.stop-button::after{
+				content: ''; 
+    			position: absolute;
+    			width: 31px;
+				height: 31px;
+				background-color: #006EEC;
+				clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				-webkit-clip-path: polygon(15% 0, 96% 40%, 100% 46%, 100% 54%, 96% 60%, 15% 100%, 5% 100%, 0 100%, 0 0, 5% 0);
+				border-radius: 15%;
+				left: 50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.center-box{
+				width: 350px;
+				height: 100%;
+				transform: translate(0, -17%);
+				display: inline-block;
+			}
+
+			.time-text{
+				margin-top: 10px;
+				width: 100px;
+				height: 45px;
+				background-color: transparent;
+				border: none;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 40px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.seconds-text{
+				width: 100%;
+				height: 20px;
+				background-color: transparent;
+				border: none;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 20px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: block;
+			}
+
+			.bottom-center-box{
+				height: 50px;
+				width: 100%;
+				margin-top: 10px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: block;
+			}
+
+			.type-text{
+				width: 50px;
+				height: 30px;
+				background-color: transparent;
+				margin-top: 8px;
+				border: none;
+				border-radius: 15px;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 13px;
+				font-weight: bold;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.mode-text{
+				width: 220px;
+				height: 30px;
+				background-color: transparent;
+				margin-top: 8px;
+				border: none;
+				border-radius: 15px;
+				outline:none;
+				user-select: none;
+				color: var(--widget-text-color);
+				position: relative;
+				font-size: 20px;
+				font-weight: bold;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				display: inline-block;
+			}
+
+			.right-box{
+				width: 120px;
+				height: 100%;
+				text-align: right;
+				text-align: -webkit-right;
+				text-align:-moz-right;
+				display: inline-block;
+			}
+			
+			.widget-edit-box{
+				width: 45px;
+				height: 45px;
+				background-color: white;
+				position: relative;
+				display: block;
+				transition: 0.25s;
+				box-shadow: black 0 0 5px;
+				border-radius: 50%;
+				margin: 15px;
+				margin-bottom: 20px;
+				margin-left: auto;
+				cursor: pointer;
+			}
+
+			.widget-edit{
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+				border-radius: 50%;
+			}
+
+			.widget-edit-box::before{
+				content: ''; 
+    			position: absolute;
+    			width: 22px;
+				height: 3px;
+				border-radius: 2px;
+				background-color: black;
+				left: 50%;
+				top: 34%;
+				transform: translate(-50%, -50%);
+			}
+
+			.widget-edit-box::after{
+				content: ''; 
+    			position: absolute;
+    			width: 22px;
+				height: 3px;
+				border-radius: 2px;
+				background-color: black;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.widget-edit::before{
+				content: ''; 
+    			position: absolute;
+    			width: 22px;
+				height: 3px;
+				border-radius: 2px;
+				background-color: black;
+				left: 50%;
+				top: 66%;
+				transform: translate(-50%, -50%);
+			}
+			
+			.widget-reset{
+				width: 45px;
+				height: 45px;
+				background-color: white;
+				position: relative;
+				display: block;
+				transition: 0.25s;
+				box-shadow: black 0 0 5px;
+				border-radius: 50%;
+				margin: 15px;
+				margin-left: auto;
+				cursor: pointer;
+				background-size: 30px;
+				background-position: center;
+				background-repeat: no-repeat, repeat;
+				background-image: url('button_reset.svg');
+			}
+
+			.widget-titel-label{
+				width: 120px;
+				font-size: 25px;
+				color: #474747;
+				text-shadow: none;
+				font-weight: bold;
+			}
+
+			.widget-select{
+				padding-left: 10px;
+				padding-right: 10px;
+				background-color: white;
+				color: #001B2A;
+				outline:none;
+				border: 1px solid #ABABAB;
+				border-radius: 30px;
+				display: inline-block;
+				width: 320px;
+				height: 50px;
+				font-weight: bold;
+				font-size: 28px;
+				box-shadow: black 0 0 5px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				text-align-last: center;
+				-moz-text-align-last: center;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				cursor: pointer;
+				transition: 0.25s;
+			}
+			
+			.widget-save-button{
+				width: 130px;
+				height: 70px;
+				border-radius: 35px;
+				margin-top: 37px;
+				background-color: #006EEC;
+				font-size: 27px;
+				text-shadow: black 0 0 2px;
+				font-weight: bold;
+			}
+
+			.ticker-time-text{
+				width: 100%;
+			}
+
+			.ticker-widget-popup-box{
+				width: 400px;
+				height: 400px;
+				padding-top: 5px;
+			}
+
+			.ticker-popup-type-select{
+				width: 190px;
+			}
+
+			.ticker-time{
+				margin-top: 30px;
+				margin-bottom: 30px;
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 300px;
+				height: 60px;
+				font-size: 45px;
+				display: block;
+			}
+
+			@media all and (orientation: portrait){				
+				.settings-button{
+					margin-right: 20px;
+				}
+
+				#button-switch{
+					margin-bottom: 260px;
+					width: 320px;
+					height: 220px;
+					border-radius: 120px;
+					border: 14px solid white;
+					background-size: 160px;
+				}
+
+				.switch-on {
+					box-shadow: white 0 0 20px;
+				}
+							
+				.switch-off {
+					box-shadow: black 0 0 10px;
+				}
+
+				#button-switch:hover{
+					transform: scale(1.0);
+				}
+
+				.widget {
+					width: 900px;
+					height: 280px;
+					border-radius: 50px;
+					box-shadow: black 0 0 20px;
+				}
+
+				.left-box{
+					width: 160px;
+					height: 100%;
+				}
+
+				.widget-button{		
+					width: 140px;
+					height: 140px;
+					box-shadow: black 0 0 10px;
+					margin: 75px;
+					margin-left: 20px;
+					margin-right: 0px;
+					cursor: auto;
+				}
+
+				.widget-button:hover, .widget-edit-box:hover, .widget-reset:hover{
+					transform: scale(1.0);
+				}
+
+				.start-button::before{
+	    			width: 50px;
+					height: 50px;
+					border: 2px solid black;
+				}
+
+				.stop-button::before{
+	    			width: 50px;
+					height: 52px;
+					border: 2px solid black;
+				}
+
+				.stop-button::after{
+	    			width: 51px;
+					height: 52px;
+				}
+
+				.center-box{
+					width: 570px;
+					height: 100%; 
+					transform: translate(0, -20%);
+				}
+
+				.time-text{
+					margin-top: 20px;
+					width: 200px;
+					height: 90px;
+					font-size: 80px;
+				}
+
+				.seconds-text{
+					width: 100%;
+					height: 40px;
+					font-size: 40px;
+				}
+
+				.bottom-center-box{
+					height: 100px;
+					width: 100%;
+					margin-top: 20px;
+				}
+
+				.type-text{
+					width: 80px;
+					height: 60px;
+					margin-top: 20px;
+					margin-bottom: 30px;
+					/*border: 2px solid var(--widget-text-color);*/
+					border-radius: 30px;
+					font-size: 22px;
+				}
+
+				.mode-text{
+					width: 365px;
+					height: 60px;
+					margin: 10px;
+					margin-top: 20px;
+					margin-bottom: 30px;
+					/*border: 2px solid var(--widget-text-color);*/
+					border-radius: 30px;
+					font-size: 35px;
+				}
+
+				.right-box{
+					width: 160px;
+					height: 100%;
+					transform: translate(0, -4%);
+				}
+				
+				.widget-edit-box{	
+					width: 90px;
+					height: 90px;
+					box-shadow: black 0 0 10px;
+					border-radius: 50%;
+					margin-top: 30px;
+					margin-bottom: 40px;
+					margin-right: 20px;
+					cursor: auto;
+				}
+
+				.widget-edit-box::before{
+	    			width: 44px;
+					height: 6px;
+					border-radius: 3px;
+					top: 34%;
+				}
+
+				.widget-edit-box::after{
+	    			width: 44px;
+					height: 6px;
+					border-radius: 3px;
+				}
+
+				.widget-edit::before{
+	    			width: 44px;
+					height: 6px;
+					border-radius: 3px;
+					top: 66%;
+				}
+				
+				.widget-reset{
+					width: 90px;
+					height: 90px;
+					box-shadow: black 0 0 10px;
+					margin-bottom: 30px;
+					margin-right: 20px;
+					cursor: auto;
+					background-size: 60px;
+				}
+
+				.widget-titel-label{
+					width: 230px;
+					font-size: 46px;
+				}
+
+				.widget-select{
+					padding-left: 20px;
+					padding-right: 20px;
+					border-radius: 50px;
+					width: 540px;
+					height: 100px;
+					font-size: 46px;
+					appearance: none;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					box-shadow: black 0 0 10px;
+					cursor: auto;
+				}
+
+				.widget-save-button{
+					width: 260px;
+					height: 140px;
+					border-radius: 70px;
+					margin-top: 60px;
+					text-shadow: black 0 0 2px;
+					font-size: 60px;
+
+				}
+
+				.ticker-time-text{
+					width: 100%;
+				}
+
+				.ticker-widget-popup-box{
+					width: 700px;
+					height: 735px;
+					padding-top: 30px;
+				}
+
+				.ticker-popup-type-select{
+					width: 310px;
+				}
+
+				.ticker-time{
+					margin-top: 40px;
+					margin-bottom: 40px;
+					padding-left: 10px;
+					padding-right: 10px;
+					width: 540px;
+					height: 120px;
+					font-size: 90px;
+					border-radius: 60px;
+				}
+			}
+		</style>
+		
+		<script type="text/javascript"> 
+			window.onload = function(){
+				var tickerWidget = document.getElementById("ticker-widget");
+				var tickerWidgetButton = document.getElementById("ticker-button");
+				var tickerTimeText = document.getElementById("ticker-time-text");
+				var tickerTickerText = document.getElementById("ticker-seconds-text");
+				var tickerModeText = document.getElementById("ticker-mode");
+				var tickerTypeText = document.getElementById("ticker-type");
+				var tickerEditButton = document.getElementById("ticker-edit-button");
+				var tickerResetButton = document.getElementById("ticker-reset-button");
+
+				var tickerOverlay = document.getElementById("ticker-overlay");
+				var tickerClosePopUpButton = document.getElementById("ticker-close-popup");
+				var tickerTypeSelect = document.getElementById("ticker-type-select");
+				var tickerPopUpTimeText = document.getElementById("ticker-popup-time-text");
+				var tickerPopUpModeText = document.getElementById("ticker-mode-select");
+				var tickerPopUpSaveButton = document.getElementById("ticker-popup-save-button");
+
+				const OFF = 0,
+      				  ON = 1,
+      				  RUN = 2,
+      				  RESET = 3,
+      				  STOP = 4;
+
+				const NONE = 0,
+      				  ALARM = 1,
+      				  TIMER = 2;
+
+				class TickerWidget{
+					constructor(widget, widgetButton, timeText, tickerText, modeText, typeText, editButton, resetButton,
+								overlay, closePopUpButton, typeSelect, popUpTimeText, popUpModeText, popUpSaveButton){
+						
+						this.state = RESET;
+
+						this.widget = widget;
+						this.widgetButton = widgetButton;
+						this.timeText = timeText;
+						this.tickerText = tickerText;
+						this.modeText = modeText;
+						this.typeText = typeText;
+						this.editButton = editButton;
+						this.resetButton = resetButton;
+
+						this.overlay = overlay;
+						this.closePopUpButton = closePopUpButton;
+						this.typeSelect = typeSelect;
+						this.popUpTimeText = popUpTimeText;
+						this.popUpModeText = popUpModeText;
+						this.popUpSaveButton = popUpSaveButton;
+					}
+				}
+
+				var ticker = new TickerWidget(tickerWidget, tickerWidgetButton, tickerTimeText, tickerTickerText, tickerModeText, tickerTypeText, tickerEditButton, tickerResetButton,
+								tickerOverlay, tickerClosePopUpButton, tickerTypeSelect, tickerPopUpTimeText, tickerPopUpModeText, tickerPopUpSaveButton);
+
+				var buttonSwitch = document.getElementById("button-switch");
+				var buttonState = 0;
+								
+				getStatus();
+
+				function getStatus(){
+					var now = new Date;
+					var UTC_Time = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds()).toString().substring(0, 10);
+					// console.log(UTC_Time);
+					var request = new XMLHttpRequest();
+					request.open('GET','/get_status?time=' + UTC_Time, true);
+								
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							var jsonConfig = JSON.parse(request.responseText);
+
+							buttonState = jsonConfig.outputs[0];
+							if(buttonState == 0){
+								buttonSwitch.classList.remove('switch-on');
+								buttonSwitch.classList.add('switch-off');
+							}
+							else if(buttonState == 1){
+								buttonSwitch.classList.remove('switch-off');
+								buttonSwitch.classList.add('switch-on');
+							}
+
+							
+							if(ticker.state != jsonConfig.ticker_state){
+								ticker.state = jsonConfig.ticker_state;
+								if(ticker.state == OFF || ticker.state == RESET){
+									ticker.widgetButton.classList.remove('start-button');
+									ticker.widgetButton.classList.add('stop-button');
+								}
+								else if(ticker.state == ON || ticker.state == RUN){
+									ticker.widgetButton.classList.remove('stop-button');
+									ticker.widgetButton.classList.add('start-button');
+								}
+							}
+							
+							if(ticker.state != RESET){
+								if(ticker.modeText.value != ticker.popUpModeText.options[getSelectBoxIndex(ticker.popUpModeText, jsonConfig.ticker_mode)].text) 
+									ticker.modeText.value = ticker.popUpModeText.options[getSelectBoxIndex(ticker.popUpModeText, jsonConfig.ticker_mode)].text;
+								if(ticker.typeText.value != ticker.typeSelect.options[getSelectBoxIndex(ticker.typeSelect, jsonConfig.ticker_type)].text) 
+									ticker.typeText.value = ticker.typeSelect.options[getSelectBoxIndex(ticker.typeSelect, jsonConfig.ticker_type)].text;
+							}
+							else{
+								ticker.modeText.value = jsonConfig.ticker_mode;
+								ticker.typeText.value = jsonConfig.ticker_type;
+							}
+							if(ticker.timeText.value != jsonConfig.ticker_time) ticker.timeText.value = jsonConfig.ticker_time;
+							if(ticker.tickerText.value != jsonConfig.ticker_ticker) ticker.tickerText.value = jsonConfig.ticker_ticker;
+		
+						}
+					}
+					request.send();
+				}
+
+				function getSelectBoxIndex(_selectBox, _value){
+					for(var i = 0; i < _selectBox.length; i++){
+						if(_selectBox.options[i].value == _value) return i;
+					}
+				}
+
+				function sendRequest(requestText, object){
+					var prevColor = object.style.backgroundColor;
+					object.style.backgroundColor = "#6E6D6D";
+					var request = new XMLHttpRequest();
+					request.open('GET','/' + requestText, true);
+						
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							object.style.backgroundColor = prevColor;
+						}
+					}
+					request.send();	
+				}
+				
+				
+				function buttonSwitchFun(){			
+					var request = new XMLHttpRequest();
+					request.open('GET','/switch?port=0', false);
+					request.send();
+					
+					if (request.readyState == 4 && request.status == 200){
+						if (request.responseText  == '0'){
+							buttonSwitch.classList.remove('switch-on');
+							buttonSwitch.classList.add('switch-off');
+							buttonState = 0;
+						} 
+						else {
+							buttonSwitch.classList.remove('switch-off');
+							buttonSwitch.classList.add('switch-on');
+							buttonState = 1;
+						}
+					}
+				}
+
+				var timerId = setInterval(() => getStatus(), 1000);
+
+				
+				function getSelectBoxIndexByText(_selectBox, _text){
+					for(var i = 0; i < _selectBox.length; i++){
+						if(_selectBox.options[i].text == _text) return i;
+					}
+				}
+
+				var numberStr = "0123456789";
+
+				function checkInputTime(_timeInputBox){
+					var str = _timeInputBox.value;
+
+					if(str.length < 5) return false;
+
+					var _hoursStr = str.substring(0, 2);
+					for(var i = 0; i < _hoursStr.length; i++){
+						if(numberStr.indexOf(_hoursStr[i]) < 0)
+							return false;
+					}
+
+					var _hours = parseInt(_hoursStr);
+					if(_hours >= 24) return false;
+
+					if(str[2] != ":") return false;
+
+					var _minutesStr = str.substring(3, 4);
+					for(var i = 0; i < _minutesStr.length; i++){
+						if(numberStr.indexOf(_minutesStr[i]) < 0)
+							return false;
+					}
+
+					var _minutes = parseInt(_minutesStr);
+					if(_minutes >= 60) return false;
+
+					if(_timeInputBox.step != 0){
+						if(str.length < 8){
+							if(str.length == 5){
+								_timeInputBox.value += ":00";
+								str = _timeInputBox.value;
+							}
+							else return false;
+						}
+
+						if(str[5] != ":") return false;
+
+						var _secondsStr = str.substring(6, 7);
+						for(var i = 0; i < _secondsStr.length; i++){
+							if(numberStr.indexOf(_secondsStr[i]) < 0)
+								return false;
+						}
+
+						var _seconds = parseInt(_secondsStr);
+						if(_seconds >= 60) return false;
+					}
+
+					return true;
+				}
+
+				ticker.widgetButton.addEventListener('click', function(){
+					if(ticker.state != RESET){
+						if(ticker.state == OFF) ticker.state = ON;
+						else if(ticker.state == ON) ticker.state = OFF;
+						else if(ticker.state == RUN) ticker.state = STOP;
+
+						var request = new XMLHttpRequest();
+						request.open('GET', 'set_ticker_state?value=' + ticker.state, false);
+						request.send();
+					
+						if(request.readyState == 4 && request.status == 200){
+							if(request.responseText == OFF || request.responseText == RESET){
+								ticker.widgetButton.classList.remove('start-button');
+								ticker.widgetButton.classList.add('stop-button');
+							}
+							else if(request.responseText == ON || request.responseText == RUN){
+								ticker.widgetButton.classList.remove('stop-button');
+								ticker.widgetButton.classList.add('start-button');
+							}
+						}
+					}
+				});
+
+				ticker.resetButton.addEventListener('click', function(){
+					ticker.state = RESET;
+
+					var request = new XMLHttpRequest();
+					request.open('GET', 'set_ticker_state?value=' + ticker.state, false);
+					request.send();
+					
+					if(request.readyState == 4 && request.status == 200){
+						if(request.responseText == RESET){
+							ticker.widgetButton.classList.remove('start-button');
+							ticker.widgetButton.classList.add('stop-button');
+						}
+					}
+				});
+
+				ticker.editButton.addEventListener('click', function(){
+					if(ticker.typeText.value == "-----") ticker.typeSelect.selectedIndex = -1;
+					else ticker.typeSelect.selectedIndex = getSelectBoxIndexByText(ticker.typeSelect, ticker.typeText.value);
+
+					tickerTypeChange();
+
+					if(ticker.modeText.value == "-----") ticker.popUpModeText.selectedIndex = -1;
+					else ticker.popUpModeText.selectedIndex = getSelectBoxIndexByText(ticker.popUpModeText, ticker.modeText.value);
+
+					ticker.overlay.style.display="block";
+				});
+
+
+				ticker.typeSelect.addEventListener('change', tickerTypeChange);
+
+				function tickerTypeChange(){
+					if(ticker.typeSelect.selectedIndex == 1) ticker.popUpTimeText.value = ticker.tickerText.value;
+					else ticker.popUpTimeText.value = ticker.timeText.value;
+				}
+
+
+				ticker.popUpSaveButton.addEventListener('click', function(){
+					if(ticker.typeSelect.selectedIndex >= 0 && ticker.popUpModeText.selectedIndex >= 0 && checkInputTime(ticker.popUpTimeText)){
+						var request = new XMLHttpRequest();
+						var json = "/set_ticker?json=" + JSON.stringify({"state":1, "output":0, "type":parseInt(ticker.typeSelect.value), "mode":parseInt(ticker.popUpModeText.value), 
+								   "time":ticker.popUpTimeText.value});
+
+						request.open('GET', json, false);
+						request.send();
+						
+						if (request.readyState == 4 && request.status == 200){
+							ticker.overlay.style.display="none";
+						}
+					}
+					else alert("Incorrect input. Please check the data and try again");
+				});
+
+				ticker.closePopUpButton.addEventListener('click', function(){
+					ticker.overlay.style.display="none";
+				});
+
+				document.querySelector('body').addEventListener('click', e => {
+				  	if(e.target == ticker.overlay){
+						ticker.overlay.style.display="none";
+					}
+				});
+				
+				buttonSwitch.addEventListener('click', buttonSwitchFun);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<div id="box">
+			<input type="button" class="image-button settings-button" onclick="location.href='/settings.html'"/>
+			<h1 class="page-titel"><strong>MaxSocket</strong></h1>
+			
+			<div class="button switch-off" id="button-switch"></div>		    
+			
+			
+			<div class="widget" id="ticker-widget">
+				<div class="left-box">
+					<div class="widget-button stop-button" id="ticker-button"></div>
+				</div>
+				<div class="center-box">
+					<input type="text" class="time-text ticker-time-text" id="ticker-time-text" readonly value="--:--:--"/>
+					<input type="text" class="seconds-text" id="ticker-seconds-text" readonly value="--:--:--"/>
+					<div class="bottom-center-box"> 
+						<input type="text" class="type-text" readonly value=""/>
+						<input type="text" class="mode-text" id="ticker-mode" readonly value="-----"/>
+						<input type="text" class="type-text" id="ticker-type" readonly value="-----"/>
+					</div>
+				</div>
+				<div class="right-box">
+					<div class="widget-edit-box" id="ticker-edit-button">
+						<div class="widget-edit"></div>
+					</div>
+					<dix class="widget-reset" id="ticker-reset-button"></dix>
+				</div>
+			</div>
+
+			<div class="overlay" id="ticker-overlay">
+				<div class="popup ticker-widget-popup-box">
+					<div class="close-popup" id="ticker-close-popup">&times;</div>
+					<div class="group">
+						<label for="ticker-type-select" class="titel-label widget-titel-label">Type:</label>
+						<select class="widget-select ticker-popup-type-select" id="ticker-type-select">
+							<option value="1">ALARM</option>
+							<option value="2">TIMER</option>
+						</select>
+					</div>
+					<input type="time" step="1" value="00:00:00" class="input-text ticker-time" id="ticker-popup-time-text"/>
+					<div class="group">
+						<select class="widget-select" id="ticker-mode-select">
+							<option value="0">OFF</option>
+							<option value="1">ON</option>
+						</select>
+					</div>
+					<input type="button" class="button widget-save-button" id="ticker-popup-save-button" value="Save"/>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>

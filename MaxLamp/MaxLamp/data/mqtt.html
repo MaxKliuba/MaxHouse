@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>MaxLamp | MQTT Configuration</title>
+		<meta charset="utf-8"/>
+		<link rel="shortcut icon" href="esp.png" type="image/png">
+		<!-- <link rel="icon" href="esp.ico" type="images/x-icon"> -->
+		<link rel="stylesheet" href="theme.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
+
+		<script type="text/javascript">
+			window.onload = function()
+			{
+				var saveButton = document.getElementById("save-button-id");
+				var server = document.getElementById("server-id");
+				var port = document.getElementById("port-id");
+				var userLogin = document.getElementById("user-login-id");
+				var userPassword = document.getElementById("user-password-id");
+				var userTopicPrefix = document.getElementById("user-topic-prefix-id");
+				var topicDeviceState = document.getElementById("device-state-topic");
+				var topicControllerState = document.getElementById("controller-state-topic");
+				var topicSetAlarm = document.getElementById("set-alarm-topic");
+				var topicSetTicker = document.getElementById("set-ticker-topic");
+				
+				getMqttConfigJson();
+				
+				function getMqttConfigJson(){
+					var request = new XMLHttpRequest();
+					request.open('GET','/get_mqtt_config',true);
+								
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							var jsonConfig = JSON.parse(request.responseText);
+							server.value = jsonConfig.server;
+							port.value = jsonConfig.port;
+							userLogin.value = jsonConfig.login_mqtt;
+							userPassword.value = jsonConfig.password_mqtt;
+							userTopicPrefix.value = jsonConfig.user_topic_prefix;
+							topicDeviceState.value = jsonConfig.device_state_topic;
+							topicControllerState.value = jsonConfig.controller_state_topic;
+							topicSetAlarm.value = jsonConfig.set_alarm_topic;
+							topicSetTicker.value = jsonConfig.set_ticker_topic;
+						}
+					}
+					request.send();
+				}
+				
+				var overlay = document.getElementById("overlay-id");
+				var popup = document.getElementById("popup-id");
+				var notification = document.getElementById("notification");
+				var closePopup = document.getElementById("close-popup-id");
+				
+				function setMqttConfigJson() 
+				{
+					var request = new XMLHttpRequest();
+					var jsonConfig = "/set_mqtt_config?json=" + JSON.stringify({"server": server.value, "port": port.value 
+									 , "login_mqtt": userLogin.value, "password_mqtt": userPassword.value, "user_topic_prefix": userTopicPrefix.value});
+					
+					request.open('GET',jsonConfig,true);
+
+					request.onload = function(){			
+						if (request.readyState == 4 && request.status == 200){
+							notification.style.color = "#006000";
+						}
+						else{
+							notification.style.color = "#D40000";
+						}
+						
+						notification.value = request.responseText;					
+						overlay.style.display="block";
+					}
+					request.send();
+				}
+				
+				function closePopUp(){
+					overlay.style.display="none";
+				}
+				
+				document.querySelector('body').addEventListener('click', e => {
+					if(e.target == overlay) closePopUp();
+				});
+							
+				saveButton.addEventListener('click', setMqttConfigJson);
+				closePopup.addEventListener('click', closePopUp);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<div id="box">
+			<input type="button" class="image-button back-button" onclick="location.href='/settings.html'"/>
+			<h1 class="page-titel"><strong>MQTT<br>Configuration</strong></h1>
+			<div class="group">
+				<label for="server-id" class="titel-label">SERVER:</label>
+				<input type="text" id="server-id" class="input-text"/>
+			</div>
+			<div class="group">
+				<label for="port-id" class="titel-label">PORT:</label>
+				<input type="number" id="port-id" class="input-text"/>
+			</div>
+			<div class="group">
+				<label for="user-login-id" class="titel-label">User LOGIN:</label>
+				<input type="text" id="user-login-id" class="input-text"/>
+			</div>
+			<div class="group">
+				<label for="user-password-id" class="titel-label">User PASSWORD:</label>
+				<input type="password" id="user-password-id" class="input-text"/>
+			</div>
+			<div class="group">
+				<label for="user-topic-prefix-id" class="titel-label">User topic PREFIX:</label>
+				<input type="text" id="user-topic-prefix-id" class="input-text"/>
+			</div>
+			<div class="group">
+				<label for="device-state-topic" class="titel-label">DEVICE STATE topic:</label>
+				<input type="text" id="device-state-topic" class="info-text"/>
+			</div>
+			<div class="group">
+				<label for="controller-state-topic" class="titel-label">CONTROLLER STATE topic:</label>
+				<input type="text" id="controller-state-topic" class="info-text"/>
+			</div>
+			<div class="group">
+				<label for="set-alarm-topic" class="titel-label">Set ALARM topic:</label>
+				<input type="text" id="set-alarm-topic" class="info-text"/>
+			</div>
+			<div class="group">
+				<label for="set-ticker-topic" class="titel-label">Set TICKER topic:</label>
+				<input type="text" id="set-ticker-topic" class="info-text"/>
+			</div>
+			
+			<input type="button" id="save-button-id" class="button save-button" value="Save"/>
+		</div>
+		<div id="overlay-id" class="overlay">
+			<div id="popup-id" class="popup">
+				<input type="text" id="notification" readonly value=""/>
+				<div id="close-popup-id" class="close-popup">&times;</div>
+			</div>
+		</div>
+	</body>
+</html>

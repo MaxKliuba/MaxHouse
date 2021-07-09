@@ -1,0 +1,14 @@
+:root {
+  --background-color:#578ED2;
+  --widget-text-color: #404040;
+}
+
+.switch::after {
+  left: 3px;
+}
+
+@media all and (orientation: portrait){			
+	.switch::after {
+		left: 8px;
+	}
+}

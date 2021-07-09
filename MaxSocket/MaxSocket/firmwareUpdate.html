@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+	<html lang = 'en'>
+	<head>
+		<meta charset = 'utf-8'>
+		<meta name = 'viewport' content = 'width=device-width, initial-scale=1'/>
+
+		<style>
+		.page-titel{
+			color: black;
+			display: block;
+			text-align: center;
+			text-align: -webkit-center;
+			text-align:-moz-center;
+			margin-top: 20px;
+			margin-bottom: 30px;
+			font-size: 30px;
+			width: 100%;
+		}
+
+		.box{
+			margin-bottom: 40px;
+			margin-left: 20px;
+			display: block;
+			width: 100%;
+		}
+
+		.titel{
+			color: black;
+			display: inline-block;
+			font-size: 20px;
+			width: 110px;
+		}
+
+		.button{
+			width: 350px;
+			margin: 10px auto;
+		}
+		</style>
+	</head>
+	<body>
+		<div class = "page-titel"><strong>Firmware Update</strong></div>
+		<form class = "box" method = 'POST' action = '' enctype = 'multipart/form-data'>
+			<div class = "titel">Firmware:</div>
+			<input class = "button" type = 'file' accept = '.bin,.bin.gz' name = 'firmware'>
+			<input type = 'submit' value = 'Update Firmware'>
+		</form>
+		<!--<form class = "box" method = 'POST' action = '' enctype = 'multipart/form-data'>
+				<div class = "titel">FileSystem : </div>
+				<input class = "button" type = 'file' multiple accept = '.html,.css,.js,.ico,.png,.jpg,.txt' name = 'filesystem'>
+				<input type = 'submit' value = 'Update FileSystem'>
+		</form>-->
+	</body>
+</html>

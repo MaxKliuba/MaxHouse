@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>PhytoStream | Wi-Fi Configuration</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="phyto.png" type="image/png">
+		<link rel="stylesheet" href="style.css" type="text/css">
+
+		<style type="text/css">
+			#back-button{
+				left: 15px;
+			}
+
+			#back-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 28px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: var(--text-color);
+				left: 20%;
+				top: 30%;
+				-webkit-transform: rotate(-45deg);
+  				transform: rotate(-45deg);
+			}
+
+			#back-button::after{
+				content: ''; 
+    			position: absolute;
+    			width: 28px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: var(--text-color);
+				left: 20%;
+				top: 63%;
+				-webkit-transform: rotate(45deg);
+  				transform: rotate(45deg);
+			}
+
+			#box{
+				padding-top: 70px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+			}
+
+			#save-button {
+				margin-top: 20px;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			window.onload = function()
+			{
+				var backButton = document.getElementById("back-button");
+				var saveButton = document.getElementById("save-button");
+				var ssid = document.getElementById("ssid-id");
+				var password = document.getElementById("password-id");
+				var currentIp = document.getElementById("current-ip-id");
+				var staIp = document.getElementById("sta-ip-id");
+				
+				getWifiConfigJson();
+				
+				function getWifiConfigJson(){
+					var request = new XMLHttpRequest();
+					request.open('GET','/get_wifi_config',true);
+								
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							var jsonConfig = JSON.parse(request.responseText);
+							ssid.value = jsonConfig.ssid;
+							password.value = jsonConfig.password;
+							currentIp.value = jsonConfig.current_ip;
+							staIp.value = jsonConfig.last_sta_ip;
+						}
+					}
+					request.send();
+				}
+				
+				var overlay = document.getElementById("overlay-id");
+				var popup = document.getElementById("popup-id");
+				var notification = document.getElementById("notification");
+				var closePopup = document.getElementById("close-popup-id");
+				
+				function setWifiConfigJson() 
+				{
+					var request = new XMLHttpRequest();
+					var jsonConfig = "/set_wifi_config?json=" + JSON.stringify({"ssid": ssid.value, "password": password.value, "current_ip": currentIp.value, "last_sta_ip": staIp.value});
+					
+					request.open('GET',jsonConfig,true);
+
+					request.onload = function(){			
+						if (request.readyState == 4 && request.status == 200){
+							notification.style.color = "#006000";
+						}
+						else{
+							notification.style.color = "#D40000";
+						}
+						
+						notification.value = request.responseText;					
+						overlay.style.display="block";
+					}
+					request.send();
+				}
+				
+				function closePopUp(){
+					overlay.style.display="none";
+				}
+
+				document.querySelector('body').addEventListener('click', e => {
+					if(e.target == overlay) closePopUp();
+				});
+							
+				saveButton.addEventListener('click', setWifiConfigJson);
+				closePopup.addEventListener('click', closePopUp);
+				backButton.addEventListener('click', function(){return location.href = '/index.html';});
+			}
+		</script>
+	</head>
+	
+	<body>
+		<header id="head">
+			<h1 class="page-titel"><strong>Wi-Fi Configuration</strong></h1>
+			<div class="header-button" id="back-button"></div>
+		</header>
+
+		<div id="box">
+			<div class="content-container">
+				<div class="group" style="margin-top: 50px;">
+					<label for="ssid-id" class="titel-label">SSID:</label>
+					<input type="text" id="ssid-id" class="input-text"/>
+				</div>
+				<div class="group">
+					<label for="password-id" class="titel-label">PASSWORD:</label>
+					<input type="password" id="password-id" class="input-text"/>
+				</div>
+				<div class="group">
+					<label for="current-ip-id" class="titel-label">CURRENT IP Address:</label>
+					<input type="text" id="current-ip-id" class="input-text input-readonly" readonly/>
+				</div>
+				<div class="group">
+					<label for="sta-ip-id" class="titel-label">Last STA IP Address:</label>
+					<input type="text" id="sta-ip-id" class="input-text input-readonly" readonly/>
+				</div>
+				<input type="button" id="save-button" class="button" value="Save"/>
+			</div>
+		</div>
+		<div id="overlay-id" class="overlay">
+			<div id="popup-id" class="popup">
+				<input type="text" id="notification" readonly/>
+				<div id="close-popup-id" class="close-popup">&times;</div>
+			</div>
+		</div>
+	</body>
+</html>

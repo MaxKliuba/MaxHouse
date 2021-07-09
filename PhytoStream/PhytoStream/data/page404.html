@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>PhytoStream | Page 404</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="phyto.png" type="image/png">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		
+		<style type="text/css">
+			#support-button{
+				right: 15px;
+			}
+
+			#support-button::before{
+				content: '?'; 
+				font-size: 45px;
+    			position: absolute;
+				color: var(--text-color);
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			#back-button{
+				left: 15px;
+			}
+
+			#back-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 28px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: var(--text-color);
+				left: 20%;
+				top: 30%;
+				-webkit-transform: rotate(-45deg);
+  				transform: rotate(-45deg);
+			}
+
+			#back-button::after{
+				content: ''; 
+    			position: absolute;
+    			width: 28px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: var(--text-color);
+				left: 20%;
+				top: 63%;
+				-webkit-transform: rotate(45deg);
+  				transform: rotate(45deg);
+			}
+
+			.support-popup{
+				width: 600px;
+				height: 160px;
+			}
+			
+			.support-popup-titel{
+				background-color: transparent;
+				border: none;
+				outline: none;
+				color: black;
+				display: block;
+				font-size: 25px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+				text-shadow: black 0 0 1px;
+				width: 500px;
+				margin: 20px auto
+			}
+			
+			.support-group{
+				width: 500px;
+				display: block;
+				background-color: transparent;
+				text-align: left;
+				text-align: -webkit-left;
+				text-align:-moz-left;
+				margin: 0px auto;
+			}
+			
+			.support-icon{
+				width: 40px;
+				height: 37px;
+				background-color: transparent;
+				border: none;
+				outline:none;
+				user-select: none;
+				display: inline-block;
+				background-size: 80px;
+				background-repeat: no-repeat, repeat;
+				background-image: url('support_icon.png');
+			}
+			
+			#gmail-icon{
+				background-position: 3px -2px;
+			}
+			
+			#telegram-icon{
+				background-position: -42px 0px;
+			}
+			
+			.support-contact{
+				margin-left: 5px;
+				width: 400px;
+				background-color: transparent;
+				border: none;
+				outline: none;
+				color: black;
+				display: inline-block;
+				font-size: 22px;
+				text-align: left;
+				text-align: -webkit-left;
+				text-align:-moz-left;
+			}
+
+			#box{
+				padding-top: 70px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+			}
+			
+			#img{				
+				border: none;
+				outline:none;
+				height: 270px;
+				margin-top: 60px;
+				margin-bottom: 60px;
+				display: block;
+				transition: 0.25s;
+			}
+			
+			@media all and (orientation: portrait){			
+				
+			}
+		</style>
+		
+		<script type="text/javascript">
+			window.onload=function()
+			{
+				var backButton = document.getElementById("back-button");
+				var supportButton = document.getElementById("support-button");
+				var overlay = document.getElementById("overlay-id");
+				var popup = document.getElementById("popup-id");
+				var closePopup = document.getElementById("close-popup-id");
+				
+				function openSupportPopUp(){				
+					overlay.style.display="block";
+				}
+				
+				function closePopUp(){
+					overlay.style.display="none";
+				}
+				
+				document.querySelector('body').addEventListener('click', e => {
+					if(e.target == overlay) closePopUp();
+				});
+				
+				backButton.addEventListener('click', function(){window.history.back();return false;});
+				supportButton.addEventListener('click', openSupportPopUp);
+				closePopup.addEventListener('click', closePopUp);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<header id="head">
+			<h1 class="page-titel">404: Not found</h1>
+			<div class="header-button" id="support-button"></div>
+			<div class="header-button" id="back-button"></div>
+		</header>
+
+		<div id="box">
+			<div class="content-container">
+				<img id="img" src="not_found_img.png"/>
+				<input type="button" class="button" id="homebutton" value="HOMEPAGE" onclick="location.href='/index.html'"/>
+			</div>
+		</div>
+
+		<div id="overlay-id" class="overlay">
+			<div id="popup-id" class="popup support-popup">
+				<input type="text" class="support-popup-titel" readonly value="Hi! Do you have any questions? Ask me :)"/>
+				<div type="text" class="support-group">
+					<input id="gmail-icon" class="support-icon" readonly />
+					<input type="text" class="support-contact" readonly value="smarthouse.max@gmail.com"/>
+				</div>
+				<div type="text" class="support-group">
+					<input id="telegram-icon" class="support-icon" readonly />
+					<input type="text" class="support-contact" readonly value="@max_smarthouse"/>
+				</div>
+				<div id="close-popup-id" class="close-popup">&times;</div>
+			</div>
+		</div>
+	</body>
+</html>

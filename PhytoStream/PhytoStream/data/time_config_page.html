@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>PhytoStream | Time Configuration</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="phyto.png" type="image/png">
+		<link rel="stylesheet" href="style.css" type="text/css">
+
+		<style type="text/css">
+		#back-button{
+				left: 15px;
+			}
+
+			#back-button::before{
+				content: ''; 
+    			position: absolute;
+    			width: 28px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: var(--text-color);
+				left: 20%;
+				top: 30%;
+				-webkit-transform: rotate(-45deg);
+  				transform: rotate(-45deg);
+			}
+
+			#back-button::after{
+				content: ''; 
+    			position: absolute;
+    			width: 28px;
+				height: 5px;
+				border-radius: 2px;
+				background-color: var(--text-color);
+				left: 20%;
+				top: 63%;
+				-webkit-transform: rotate(45deg);
+  				transform: rotate(45deg);
+			}
+
+			#box{
+				padding-top: 70px;
+				text-align: center;
+				text-align: -webkit-center;
+				text-align:-moz-center;
+			}
+
+			.content-container {
+				height: 450px;
+			}
+
+			#save-button {
+				margin-top: 30px;
+			}
+
+			.select-box{
+				width: 360px;
+				height: 55px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				cursor: pointer;
+			}
+
+			.switch {
+				position: relative;
+				display: inline-block;
+				width: 100px;
+				height: 50px;
+				margin-left: 130px;
+				margin-right: 130px;
+				transition: 0.25s;
+			}
+
+			.switch input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+
+			.slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #ccc;
+				-webkit-transition: .4s;
+				transition: .4s;
+				border-radius: 50px;
+			}
+
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 40px;
+				width: 40px;
+				left: 5px;
+				bottom: 5px;
+				background-color: white;
+				-webkit-transition: .4s;
+				transition: .4s;
+				border-radius: 50%;
+			}
+
+			input:checked+.slider {
+				background-color: var(--switch-color-on);
+			}
+
+			input:focus+.slider {
+				box-shadow: 0 0 1px var(--switch-color-on);
+			}
+
+			input:checked+.slider:before {
+				-webkit-transform: translateX(50px);
+				-ms-transform: translateX(50px);
+				transform: translateX(50px);
+			}
+			
+			.switch:hover{
+				transform: scale(1.2);
+			}
+
+			#rule{
+				display: none;
+			}
+
+			.main-rule-group{
+				margin: 40px auto;
+				display: block;
+			}
+
+			.rule-group{
+				width: 520px;
+				display: inline-block;
+			}
+
+			.sub-group{
+				margin: 20px auto;
+				display: block;
+			}
+
+			.sub-titel-label{
+				width: 250px;
+			}
+
+			.rule-text-box{
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 265px;
+				height: 55px;
+				font-size: 25px;
+				text-align: center;
+				text-align-last: center;
+				-moz-text-align-last: center;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				cursor: pointer;
+			}
+
+			.rule-number-box{
+				width: 240px;
+				height: 50px;
+			}
+
+			@media all and (orientation: portrait) {
+				.rule-text-box, .select-box, .slider{
+					cursor: auto;
+				}
+			}
+		</style>
+		
+		<script type="text/javascript">
+			window.onload = function()
+			{
+				var backButton = document.getElementById("back-button");
+				
+				var saveButton = document.getElementById("save-button");
+				var timeZone = document.getElementById("time-zone-id");
+				var clockAdjustmentSwitch = document.getElementById("clock-adjustment-switch");
+				var ruleBox = document.getElementById("rule");
+				var dstMonth = document.getElementById("rule-dst-month-id");
+				var dstWeek = document.getElementById("rule-dst-week-id");
+				var dstDofW = document.getElementById("rule-dst-dow-id");
+				var dstHour = document.getElementById("rule-dst-hour-id");
+				var stdMonth = document.getElementById("rule-std-month-id");
+				var stdWeek = document.getElementById("rule-std-week-id");
+				var stdDofW = document.getElementById("rule-std-dow-id");
+				var stdHour = document.getElementById("rule-std-hour-id");
+
+				var overlay = document.getElementById("overlay-id");
+				var popup = document.getElementById("popup-id");
+				var notification = document.getElementById("notification");
+				var closePopup = document.getElementById("close-popup-id");
+				
+				getTimeConfigJson();
+				
+				function getTimeConfigJson(){
+					var request = new XMLHttpRequest();
+					request.open('GET','/get_time_config',true);
+								
+					request.onload = function(){
+						if (request.readyState == 4 && request.status == 200){
+							var jsonConfig = JSON.parse(request.responseText);
+							
+							timeZone.options.selectedIndex = jsonConfig.time_zone_id;
+							clockAdjustmentSwitch.checked = jsonConfig.is_dst;
+							clockAdjustmentSwitchClick();
+
+							dstMonth.value = jsonConfig.dst_month;
+							dstWeek.value = jsonConfig.dst_week;
+							dstDofW.value = jsonConfig.dst_dow;
+							dstHour.value = jsonConfig.dst_hour;
+
+							stdMonth.value = jsonConfig.std_month;
+							stdWeek.value = jsonConfig.std_week;
+							stdDofW.value = jsonConfig.std_dow;
+							stdHour.value = jsonConfig.std_hour;
+						}
+					}
+					request.send();
+				}
+				
+				function setTimeConfigJson(){
+					if(checkInputNumbers()){
+						var request = new XMLHttpRequest();
+						var jsonConfig = "/set_time_config?json=" + JSON.stringify({"time_zone_offset":parseInt(timeZone.options[timeZone.options.selectedIndex].value), "time_zone_id":timeZone.options.selectedIndex, 
+										 "is_dst":clockAdjustmentSwitch.checked, "dst_week":parseInt(dstWeek.options[dstWeek.options.selectedIndex].value), "dst_dow":parseInt(dstDofW.options[dstDofW.options.selectedIndex].value), 
+										 "dst_month":parseInt(dstMonth.options[dstMonth.options.selectedIndex].value), "dst_hour":parseInt(dstHour.value), 
+										 "std_week":parseInt(stdWeek.options[stdWeek.options.selectedIndex].value), "std_dow":parseInt(stdDofW.options[stdDofW.options.selectedIndex].value), 
+										 "std_month":parseInt(stdMonth.options[stdMonth.options.selectedIndex].value), "std_hour":parseInt(stdHour.value)});
+						
+						request.open('GET',jsonConfig,true);
+
+						request.onload = function(){			
+							if (request.readyState == 4 && request.status == 200){
+								notification.style.color = "#006000";
+							}
+							else{
+								notification.style.color = "#D40000";
+							}
+							
+							notification.value = request.responseText;					
+							overlay.style.display="block";
+						}
+						request.send();
+					}
+					else alert("Incorrect input. Please check the data and try again");
+				}
+
+				var numberStr = "0123456789";
+
+				function checkInputNumbers(){
+					var _dstHourStr = dstHour.value;
+					var _stdHourStr = stdHour.value;
+
+					if(_dstHourStr.length == 0 || _stdHourStr.length == 0) return false;
+
+					for(var i = 0; i < _dstHourStr.length; i++){
+						if(numberStr.indexOf(_dstHourStr[i]) < 0)
+							return false;
+					}
+					
+					for(var i = 0; i < _stdHourStr.length; i++){
+						if(numberStr.indexOf(_stdHourStr[i]) < 0)
+							return false;
+					}
+
+					var _dstHour = parseInt(_dstHourStr);
+					if(_dstHour < 0 || _dstHour > 23) return false;
+
+					var _stdHour = parseInt(_stdHourStr);
+					if(_stdHour < 0 || _stdHour > 23) return false;
+
+					return true;
+				}
+
+				function clockAdjustmentSwitchClick(){
+					if (clockAdjustmentSwitch.checked) {
+						ruleBox.style.display = "block";
+					}
+					else {
+						ruleBox.style.display = "none";
+					}
+				}
+
+				function closePopUp(){
+					overlay.style.display="none";
+				}
+				
+				document.querySelector('body').addEventListener('click', e => {
+					if(e.target == overlay) closePopUp();
+				});
+
+				clockAdjustmentSwitch.addEventListener('click', clockAdjustmentSwitchClick);
+				saveButton.addEventListener('click', setTimeConfigJson);
+				closePopup.addEventListener('click', closePopUp);
+				backButton.addEventListener('click', function(){return location.href = '/index.html';});
+			}
+		</script>
+	</head>
+	
+	<body>
+		<header id="head">
+			<h1 class="page-titel"><strong>Time Configuration</strong></h1>
+			<div class="header-button" id="back-button"></div>
+		</header>
+
+		<div id="box">
+			<div class="content-container">
+				<div class="group" style="margin-top: 50px;">
+					<label for="time-zone-id" class="titel-label" style="width: 200px; margin-right: 40px;">Time zone:</label>
+					<select id="time-zone-id" class="input-text select-box">
+						<option useDaylightTime="0" value="-720">(GMT-12:00) International Date Line West</option>
+						<option useDaylightTime="0" value="-660">(GMT-11:00) Midway Island, Samoa</option>
+						<option useDaylightTime="0" value="-600">(GMT-10:00) Hawaii</option>
+						<option useDaylightTime="1" value="-540">(GMT-09:00) Alaska</option>
+						<option useDaylightTime="1" value="-480">(GMT-08:00) Pacific Time (US & Canada)</option>
+						<option useDaylightTime="1" value="-480">(GMT-08:00) Tijuana, Baja California</option>
+						<option useDaylightTime="0" value="-420">(GMT-07:00) Arizona</option>
+						<option useDaylightTime="1" value="-420">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+						<option useDaylightTime="1" value="-420">(GMT-07:00) Mountain Time (US & Canada)</option>
+						<option useDaylightTime="0" value="-360">(GMT-06:00) Central America</option>
+						<option useDaylightTime="1" value="-360">(GMT-06:00) Central Time (US & Canada)</option>
+						<option useDaylightTime="1" value="-360">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+						<option useDaylightTime="0" value="-360">(GMT-06:00) Saskatchewan</option>
+						<option useDaylightTime="0" value="-300">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+						<option useDaylightTime="1" value="-300">(GMT-05:00) Eastern Time (US & Canada)</option>
+						<option useDaylightTime="1" value="-300">(GMT-05:00) Indiana (East)</option>
+						<option useDaylightTime="1" value="-240">(GMT-04:00) Atlantic Time (Canada)</option>
+						<option useDaylightTime="0" value="-240">(GMT-04:00) Caracas, La Paz</option>
+						<option useDaylightTime="0" value="-240">(GMT-04:00) Manaus</option>
+						<option useDaylightTime="1" value="-240">(GMT-04:00) Santiago</option>
+						<option useDaylightTime="1" value="-210">(GMT-03:30) Newfoundland</option>
+						<option useDaylightTime="1" value="-180">(GMT-03:00) Brasilia</option>
+						<option useDaylightTime="0" value="-180">(GMT-03:00) Buenos Aires, Georgetown</option>
+						<option useDaylightTime="1" value="-180">(GMT-03:00) Greenland</option>
+						<option useDaylightTime="1" value="-180">(GMT-03:00) Montevideo</option>
+						<option useDaylightTime="1" value="-120">(GMT-02:00) Mid-Atlantic</option>
+						<option useDaylightTime="0" value="-60">(GMT-01:00) Cape Verde Is.</option>
+						<option useDaylightTime="1" value="-60">(GMT-01:00) Azores</option>
+						<option useDaylightTime="0" value="0">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
+						<option useDaylightTime="1" value="0">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon,
+							London</option>
+						<option useDaylightTime="1" value="60">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna
+						</option>
+						<option useDaylightTime="1" value="60">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague
+						</option>
+						<option useDaylightTime="1" value="60">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+						<option useDaylightTime="1" value="60">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+						<option useDaylightTime="1" value="60">(GMT+01:00) West Central Africa</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Amman</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Beirut</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Cairo</option>
+						<option useDaylightTime="0" value="120">(GMT+02:00) Harare, Pretoria</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
+						</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Jerusalem</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Minsk</option>
+						<option useDaylightTime="1" value="120">(GMT+02:00) Windhoek</option>
+						<option useDaylightTime="0" value="180">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
+						<option useDaylightTime="1" value="180">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+						<option useDaylightTime="0" value="180">(GMT+03:00) Nairobi</option>
+						<option useDaylightTime="0" value="180">(GMT+03:00) Tbilisi</option>
+						<option useDaylightTime="1" value="210">(GMT+03:30) Tehran</option>
+						<option useDaylightTime="0" value="240">(GMT+04:00) Abu Dhabi, Muscat</option>
+						<option useDaylightTime="1" value="240">(GMT+04:00) Baku</option>
+						<option useDaylightTime="1" value="240">(GMT+04:00) Yerevan</option>
+						<option useDaylightTime="0" value="270">(GMT+04:30) Kabul</option>
+						<option useDaylightTime="1" value="300">(GMT+05:00) Yekaterinburg</option>
+						<option useDaylightTime="0" value="300">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+						<option useDaylightTime="0" value="330">(GMT+05:30) Sri Jayawardenapura</option>
+						<option useDaylightTime="0" value="330">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+						<option useDaylightTime="0" value="345">(GMT+05:45) Kathmandu</option>
+						<option useDaylightTime="1" value="360">(GMT+06:00) Almaty, Novosibirsk</option>
+						<option useDaylightTime="0" value="360">(GMT+06:00) Astana, Dhaka</option>
+						<option useDaylightTime="0" value="390">(GMT+06:30) Yangon (Rangoon)</option>
+						<option useDaylightTime="0" value="420">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+						<option useDaylightTime="1" value="420">(GMT+07:00) Krasnoyarsk</option>
+						<option useDaylightTime="0" value="480">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+						<option useDaylightTime="0" value="480">(GMT+08:00) Kuala Lumpur, Singapore</option>
+						<option useDaylightTime="0" value="480">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+						<option useDaylightTime="0" value="480">(GMT+08:00) Perth</option>
+						<option useDaylightTime="0" value="480">(GMT+08:00) Taipei</option>
+						<option useDaylightTime="0" value="540">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+						<option useDaylightTime="0" value="540">(GMT+09:00) Seoul</option>
+						<option useDaylightTime="1" value="540">(GMT+09:00) Yakutsk</option>
+						<option useDaylightTime="0" value="570">(GMT+09:30) Adelaide</option>
+						<option useDaylightTime="0" value="570">(GMT+09:30) Darwin</option>
+						<option useDaylightTime="0" value="600">(GMT+10:00) Brisbane</option>
+						<option useDaylightTime="1" value="600">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+						<option useDaylightTime="1" value="600">(GMT+10:00) Hobart</option>
+						<option useDaylightTime="0" value="600">(GMT+10:00) Guam, Port Moresby</option>
+						<option useDaylightTime="1" value="600">(GMT+10:00) Vladivostok</option>
+						<option useDaylightTime="1" value="660">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+						<option useDaylightTime="1" value="720">(GMT+12:00) Auckland, Wellington</option>
+						<option useDaylightTime="0" value="720">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
+						<option useDaylightTime="0" value="780">(GMT+13:00) Nuku'alofa</option>
+					</select>
+				</div>
+				<div class="group">
+					<label for="clock-adjustment-switch" class="titel-label" style="width: 200px; margin-right: 40px;">Automatic clock adjustment:</label>
+					<label class="switch">
+						<input type="checkbox" id="clock-adjustment-switch">
+						<span class="slider"></span>
+					</label>
+				</div>
+				<input type="button" id="save-button" class="button" value="Save"/>
+			</div>
+		
+			<div id="rule">
+				<div class="content-container">
+					<div class="main-rule-group">
+						<label for="dst-rule-group" class="titel-label">DAYLIGHT time (RULE):</label>
+						<div id="dst-rule-group" class="rule-group">
+							<div class="sub-group">
+								<label for="rule-dst-month-id" class="titel-label sub-titel-label">&#8226; Month:</label>
+								<select id="rule-dst-month-id" class="input-text rule-text-box">
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+							</div>
+				
+							<div class="sub-group">
+								<label for="rule-dst-week-id" class="titel-label sub-titel-label">&#8226; Week:</label>
+								<select id="rule-dst-week-id" class="input-text rule-text-box">
+									<option value="1">First</option>
+									<option value="2">Second</option>
+									<option value="3">Third</option>
+									<option value="4">Fourth</option>
+									<option value="0">Last</option>
+								</select>
+							</div>
+				
+							<div class="sub-group">
+								<label for="rule-dst-dow-id" class="titel-label sub-titel-label">&#8226; Day of week:</label>
+								<select id="rule-dst-dow-id" class="input-text rule-text-box">
+									<option value="2">Monday</option>
+									<option value="3">Tuesday</option>
+									<option value="4">Wednesday</option>
+									<option value="5">Thursday</option>
+									<option value="6">Friday</option>
+									<option value="7">Saturday</option>
+									<option value="1">Sunday</option>
+								</select>
+							</div>
+				
+							<div class="sub-group">
+								<label for="rule-dst-hour-id" class="titel-label sub-titel-label">&#8226; Hour:</label>
+								<input type="number" min="0" max="23" value="0" id="rule-dst-hour-id"
+									class="input-text rule-text-box rule-number-box" />
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="content-container">
+					<div class="main-rule-group">
+						<label for="std-rule-group" class="titel-label">STANDART time (RULE):</label>
+						<div id="std-rule-group" class="rule-group">
+							<div class="sub-group">
+								<label for="rule-std-month-id" class="titel-label sub-titel-label">&#8226; Month:</label>
+								<select id="rule-std-month-id" class="input-text rule-text-box">
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+							</div>
+				
+							<div class="sub-group">
+								<label for="rule-std-week-id" class="titel-label sub-titel-label">&#8226; Week:</label>
+								<select id="rule-std-week-id" class="input-text rule-text-box">
+									<option value="1">First</option>
+									<option value="2">Second</option>
+									<option value="3">Third</option>
+									<option value="4">Fourth</option>
+									<option value="0">Last</option>
+								</select>
+							</div>
+				
+							<div class="sub-group">
+								<label for="rule-std-dow-id" class="titel-label sub-titel-label">&#8226; Day of week:</label>
+								<select id="rule-std-dow-id" class="input-text rule-text-box">
+									<option value="2">Monday</option>
+									<option value="3">Tuesday</option>
+									<option value="4">Wednesday</option>
+									<option value="5">Thursday</option>
+									<option value="6">Friday</option>
+									<option value="7">Saturday</option>
+									<option value="1">Sunday</option>
+								</select>
+							</div>
+				
+							<div class="sub-group">
+								<label for="rule-std-hour-id" class="titel-label sub-titel-label">&#8226; Hour:</label>
+								<input type="number" min="0" max="23" value="0" id="rule-std-hour-id"
+									class="input-text rule-text-box rule-number-box" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="overlay-id" class="overlay">
+			<div id="popup-id" class="popup">
+				<input type="text" id="notification" readonly value=""/>
+				<div id="close-popup-id" class="close-popup">&times;</div>
+			</div>
+		</div>
+	</body>
+</html>
