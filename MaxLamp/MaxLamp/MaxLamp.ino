@@ -515,8 +515,8 @@ void setup() {
   effects[5] = Effect(forest3DEffect, 60, 4, 5, 1, 255, 30, 10, 1);
   effects[6] = Effect(firefliesEffect, 15, 40, 1, 2, 40, 120, 1, 14);
   effects[7] = Effect(sparklesEffect, 5, 54, 1, 2, 100, 120, 1, 2);
-  effects[8] = Effect(rainbowVerticalEffect, 12, 20);
-  effects[9] = Effect(rainbowHorizontalEffect, 16, 20);
+  effects[8] = Effect(rainbowVerticalEffect, 12, 20, 2, 2, 40, 60, 2, 2);
+  effects[9] = Effect(rainbowHorizontalEffect, 16, 20, 2, 2, 50, 60, 2, 2);
   effects[10] = Effect(rainbow3DEffect, 60, 4, 5, 1, 255, 30, 10, 1);
   effects[11] = Effect(rainbowStripe3DEffect, 60, 2, 5, 1, 255, 30, 10, 1);
   effects[12] = Effect(plasma3DEffect, 60, 4, 5, 1, 255, 30, 10, 1);
